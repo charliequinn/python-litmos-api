@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&search=charlie.smith@pieshop.net
+  response:
+    body: {string: '[{"Id":"CCzIpPA13Wo1","UserName":"charlie.smith@pieshop.net","FirstName":"Charlie","LastName":"Smith","Active":true,"Email":"charlie.smith@pieshop.net","AccessLevel":"Account_Owner"}]'}
+    headers:
+      Content-Length: ['189']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 15:01:54 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

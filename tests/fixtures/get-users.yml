@@ -1,0 +1,35 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: "[{\"Id\":\"znJcFwQqfWc2\",\"UserName\":\"john.smith@pieshop.net\"\
+        ,\"FirstName\":\"John\",\"LastName\":\"Smith\",\"Active\":true,\"Email\"\
+        :\"john.smith@pieshop.net\",\"AccessLevel\":\"Learner\"},{\"Id\":\"\
+        VoOhF2EneBk1\",\"UserName\":\"paul.daniels@pieshop.net\",\"FirstName\":\"\
+        Paul\",\"LastName\":\"Daniels\",\"Active\":true,\"Email\":\"paul.daniels@pieshop.net\"\
+        ,\"AccessLevel\":\"Learner\"},{\"Id\":\"hp0As8RdrJw1\",\"UserName\":\"adam.pelle@pieshop.net\"\
+        ,\"FirstName\":\"Adam\",\"LastName\":\"Pelle\",\"Active\":true,\"Email\":\"\
+        adam.pelle@pieshop.net\",\"AccessLevel\":\"Learner\"},{\"Id\":\"bGzF2wizEM81\"\
+        ,\"UserName\":\"adrian.blades@pieshop.net\",\"FirstName\":\"Adrian\",\"\
+        LastName\":\"Blades\",\"Active\":true,\"Email\":\"adrian.blades@pieshop.net\"\
+        ,\"AccessLevel\":\"Learner\"},{\"Id\":\"rnjx2HeQOEY1\",\"UserName\":\"agnieszka.bomersbach@pieshop.net\"\
+        ,\"FirstName\":\"Micheal\",\"LastName\":\"Bomersbach\",\"Active\":true,\"\
+        Email\":\"michael.bomersbach@pieshop.net\",\"AccessLevel\":\"Learner\"\
+        },{\"Id\":\"yB_V12ep9HI1\",\"UserName\":\"pat.smith@pieshop.net\",\"\
+        FirstName\":\"Pat\",\"LastName\":\"Smith\",\"Active\":true,\"Email\":\"\
+        pat.smith@pieshop.net\",\"AccessLevel\":\"Learner\"}]"}
+    headers:
+      Content-Length: ['18379']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 10:29:53 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

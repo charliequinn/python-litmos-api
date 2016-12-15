@@ -1,0 +1,135 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200
+  response:
+    body: {string: "[{\"Id\":\"mVN_K4Q9yuQ1\",\"UserName\":\"paul.hirst@pieshop.net\"\
+        ,\"FirstName\":\"Paul\",\"LastName\":\"Hirst\",\"Active\":true,\"Email\"\
+        :\"paul.hirst@pieshop.net\",\"AccessLevel\":\"Team_Leader\"},{\"Id\"\
+        :\"Kod1a6lLq1M1\",\"UserName\":\"laura.kelvin@pieshop.net\",\"FirstName\"\
+        :\"Laura\",\"LastName\":\"Kelvin\",\"Active\":true,\"Email\":\"laura.kelvin@pieshop.net\"\
+        ,\"AccessLevel\":\"Team_Leader\"}]"}
+    headers:
+      Content-Length: ['36755']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 16:24:09 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=200
+  response:
+    body: {string: "[{\"Id\":\"mVN_K4Q4awA1\",\"UserName\":\"james.smith@pieshop.net\"\
+        ,\"FirstName\":\"James\",\"LastName\":\"Smith\",\"Active\":true,\"Email\"\
+        :\"james.smith@pieshop.net\",\"AccessLevel\":\"Team_Leader\"},{\"Id\"\
+        :\"Kol1aq1ptM1\",\"UserName\":\"pat.bonner@pieshop.net\",\"FirstName\"\
+        :\"Stuart\",\"LastName\":\"Kelvin\",\"Active\":true,\"Email\":\"pat.bonner@pieshop.net\"\
+        ,\"AccessLevel\":\"Learner\"}]"}
+    headers:
+      Content-Length: ['36453']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 16:24:11 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=400
+  response:
+    body: {string: "[{\"Id\":\"mVN_YTd4quQ1\",\"UserName\":\"mary.lou@pieshop.net\"\
+        ,\"FirstName\":\"Mary\",\"LastName\":\"Lou\",\"Active\":true,\"Email\"\
+        :\"mary.lou@pieshop.net\",\"AccessLevel\":\"Learner\"},{\"Id\"\
+        :\"Kod1a1PpqtM1\",\"UserName\":\"mark.lin@pieshop.net\",\"FirstName\"\
+        :\"Mark\",\"LastName\":\"Lin\",\"Active\":true,\"Email\":\"mark.lin@pieshop.net\"\
+        ,\"AccessLevel\":\"Learner\"}]"}
+    headers:
+      Content-Length: ['36395']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 16:24:13 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=600
+  response:
+    body: {string: "[{\"Id\":\"mVN_K4Q4quQ1\",\"UserName\":\"stuart.hirst@pieshop.net\"\
+        ,\"FirstName\":\"Stuart\",\"LastName\":\"Hirst\",\"Active\":true,\"Email\"\
+        :\"stuart.hirst@pieshop.net\",\"AccessLevel\":\"Team_Leader\"},{\"Id\"\
+        :\"Kod1a6lLptM1\",\"UserName\":\"stuart.kelvin@pieshop.net\",\"FirstName\"\
+        :\"Stuart\",\"LastName\":\"Kelvin\",\"Active\":true,\"Email\":\"stuart.kelvin@pieshop.net\"\
+        ,\"AccessLevel\":\"Team_Leader\"}]"}
+    headers:
+      Content-Length: ['36496']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 16:24:15 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=800
+  response:
+    body: {string: "[{\"Id\":\"mVN_K4Q4quQ1\",\"UserName\":\"stuart.hirst@pieshop.net\"\
+        ,\"FirstName\":\"Stuart\",\"LastName\":\"Hirst\",\"Active\":true,\"Email\"\
+        :\"stuart.hirst@pieshop.net\",\"AccessLevel\":\"Team_Leader\"},{\"Id\"\
+        :\"Kod1a6lLptM1\",\"UserName\":\"stuart.kelvin@pieshop.net\",\"FirstName\"\
+        :\"Stuart\",\"LastName\":\"Kelvin\",\"Active\":true,\"Email\":\"stuart.kelvin@pieshop.net\"\
+        ,\"AccessLevel\":\"Team_Leader\"}]"}
+    headers:
+      Content-Length: ['16213']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 16:24:18 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=1000
+  response:
+    body: {string: '[]'}
+    headers:
+      Content-Length: ['2']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 16:24:20 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users/rnjx2WaQOEY1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"rnjx2WaQOEY1","UserName":"janine.butcher@pieshop.net","FirstName":"Janine","LastName":"Butcher","FullName":"Janine
+        Butcher","Email":"janine.butcher@pieshop.net","AccessLevel":"Learner","DisableMessages":false,"Active":true,"Skype":null,"PhoneWork":null,"PhoneMobile":null,"LastLogin":"2016-12-09T07:54:27Z","LoginKey":"https:\/\/pieshopuniversity.litmos.com\/\/login.aspx?loginkey=fdee8276-40fd-4ccf-a6e8-7b08eafaqfd2","IsCustomUsername":false,"Password":"","SkipFirstLogin":true,"TimeZone":"UTC","SalesforceId":null,"OriginalId":4138947,"Street1":null,"Street2":null,"City":null,"State":null,"PostalCode":null,"Country":null,"CompanyName":null,"JobTitle":null,"CustomField1":"Janine
+        Butcher","CustomField2":null,"CustomField3":null,"Culture":"en-US","CustomField4":null,"CustomField5":null,"CustomField6":null,"CustomField7":null,"CustomField8":null,"CustomField9":null,"CustomField10":null,"SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-11-10T13:50:11Z","Points":0}'}
+    headers:
+      Content-Length: ['1035']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 15 Dec 2016 15:12:34 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

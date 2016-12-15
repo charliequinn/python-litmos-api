@@ -1,0 +1,16 @@
+[paths]
+source =
+   src/litmos_api
+   */site-packages/litmos_api
+
+[run]
+branch = true
+source =
+    litmos_api
+    tests
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*
