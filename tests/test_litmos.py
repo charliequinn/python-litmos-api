@@ -16,7 +16,7 @@ class TestPayload():
 
 class TestLitmos():
     def test_acceptable_types(self):
-        eq_(Litmos.ACCEPTABLE_TYPES, ['User'])
+        eq_(Litmos.ACCEPTABLE_TYPES, ['User', 'Team'])
 
     def test_init(self):
         litmos = Litmos('app-key-123456', 'app-name-123456')

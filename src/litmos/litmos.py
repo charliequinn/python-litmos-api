@@ -11,7 +11,7 @@ class Payload(object):
 
 
 class Litmos(object):
-    ACCEPTABLE_TYPES = ['User']
+    ACCEPTABLE_TYPES = ['User', 'Team']
 
     def __init__(self, api_key, app_name):
         self.litmos_api = LitmosAPI(api_key, app_name)

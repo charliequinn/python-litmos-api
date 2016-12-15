@@ -13,6 +13,14 @@ class TestLitmosIntegration():
 
         eq_(len(users), 10)
 
+    @vcr.use_cassette('fixtures/teams-all-paginated.yml')
+    def test_Team_all(self):
+        lms = Litmos('app-key1234', 'app-name12345')
+
+        teams = lms.Team.all()
+
+        eq_(len(teams), 8)
+
     @vcr.use_cassette('fixtures/search-users.yml')
     def test_User_search(self):
         lms = Litmos('app-key12345', 'app-name12345')
