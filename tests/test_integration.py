@@ -1,5 +1,7 @@
 from nose.tools import eq_
 import vcr
+from collections import OrderedDict
+
 
 from litmos.litmos import Litmos
 
@@ -20,6 +22,31 @@ class TestLitmosIntegration():
         teams = lms.Team.all()
 
         eq_(len(teams), 8)
+
+    @vcr.use_cassette('fixtures/users-create.yml')
+    def test_User_create(self):
+        lms = Litmos('app-key1234', 'app-name12345')
+
+        od = OrderedDict([
+            ("Id", ''),
+            ("UserName", 'john.smith'),
+            ("FirstName", 'John'),
+            ("LastName", 'Smith'),
+            ("FullName", ''),
+            ("Email", 'john.smith@pieshop.com'),
+            ("AccessLevel", 'Learner'),
+            ("DisableMessages", False),
+            ("Active", True),
+            ("LoginKey", ''),
+            ("IsCustomUsername", True),
+            ("SkipFirstLogin", False),
+            ("TimeZone", '')
+        ])
+
+        user = lms.User.create({'UserName': 'jo.ba'})
+
+        eq_(user.UserName,'john.smith')
+        eq_(user.FirstName, 'John')
 
     @vcr.use_cassette('fixtures/search-users.yml')
     def test_User_search(self):

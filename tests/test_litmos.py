@@ -1,11 +1,13 @@
+from collections import OrderedDict
 from unittest.mock import patch, Mock
+
 
 from nose.tools import raises, eq_, assert_true
 
-from litmos.litmos import Payload, Litmos, LitmosType, LitmosAPI
+from litmos.litmos import Payload, Litmos, LitmosType, LitmosAPI, User
 
 
-class TestPayload():
+class TestPayload:
     def test_init(self):
         json_dict = {'variable_name_1': 123.4, 'variable_name_4': 'Test'}
         payload = Payload(json_dict)
@@ -14,7 +16,7 @@ class TestPayload():
         eq_(payload.variable_name_4, json_dict['variable_name_4'])
 
 
-class TestLitmos():
+class TestLitmos:
     def test_acceptable_types(self):
         eq_(Litmos.ACCEPTABLE_TYPES, ['User', 'Team'])
 
@@ -27,7 +29,7 @@ class TestLitmos():
         litmos = Litmos('app-key-123456', 'app-name-123456')
         user = litmos.User
 
-        eq_(type(user), LitmosType)
+        eq_(type(user), User)
         eq_(user.resource_name, 'users')
         eq_(litmos.litmos_api, user.litmos_api)
 
@@ -37,7 +39,7 @@ class TestLitmos():
         litmos.Pie
 
 
-class TestLitmosAPI():
+class TestLitmosAPI:
     def test_root_url(self):
         eq_(LitmosAPI.ROOT_URL,'https://api.litmos.com/v1.svc/')
 
@@ -100,6 +102,21 @@ class TestLitmosAPI():
             'https://api.litmos.com/v1.svc/pies/345?apikey=api-key-123&source=app-name-123&format=json'
         )
 
+    @patch('litmos.litmos.requests.post')
+    def test_create(self, requests_post):
+        requests_post.return_value = Mock(
+            status_code=200,
+            text='[]'
+        )
+
+        litmos_api = LitmosAPI('api-key-123', 'app-name-123')
+
+        eq_(litmos_api.create('pies', {'Name': 'Cheese & Onion'}), [])
+        requests_post.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies?apikey=api-key-123&source=app-name-123&format=json',
+            json={'Name': 'Cheese & Onion'}
+        )
+
     @patch('litmos.litmos.requests.get')
     def test_search(self, requests_get):
         requests_get.return_value = Mock(
@@ -115,9 +132,21 @@ class TestLitmosAPI():
         )
 
 
-class TestLitmosType():
+class TestLitmosType:
     def test_init(self):
         litmos_type = LitmosType('Pie', {'dd': 3})
 
         eq_(litmos_type.resource_name, 'pies')
         eq_(litmos_type.litmos_api, {'dd': 3})
+
+
+
+class TestUser:
+    def test_create(self):
+        api_mock = Mock()
+        api_mock.create.return_value = {"dd": 3}
+        user = User('Pie', api_mock)
+
+        user.create({'UserName': 'paul.smith', 'FirstName': 'Paul'})
+
+        api_mock.create.assert_called_once_with('pies', OrderedDict([('Id', ''), ('UserName', 'paul.smith'), ('FirstName', 'Paul'), ('LastName', ''), ('FullName', ''), ('Email', ''), ('AccessLevel', 'Learner'), ('DisableMessages', True), ('Active', True), ('Skype', ''), ('PhoneWork', ''), ('PhoneMobile', ''), ('LastLogin', ''), ('LoginKey', ''), ('IsCustomUsername', False), ('Password', ''), ('SkipFirstLogin', True), ('TimeZone', 'UTC'), ('Street1', ''), ('Street2', ''), ('City', ''), ('State', ''), ('PostalCode', ''), ('Country', ''), ('CompanyName', ''), ('JobTitle', ''), ('CustomField1', ''), ('CustomField2', ''), ('CustomField4', ''), ('CustomField5', ''), ('CustomField6', ''), ('CustomField7', ''), ('CustomField8', ''), ('CustomField9', ''), ('CustomField10', ''), ('Culture', '')]))
