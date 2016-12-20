@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&limit=200
   response:
     body: {string: "[{\"Id\":\"mVN_K4Q9yuQ1\",\"UserName\":\"paul.hirst@pieshop.net\"\
         ,\"FirstName\":\"Paul\",\"LastName\":\"Hirst\",\"Active\":true,\"Email\"\
@@ -30,7 +30,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=200
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&limit=200&start=200
   response:
     body: {string: "[{\"Id\":\"mVN_K4Q4awA1\",\"UserName\":\"james.smith@pieshop.net\"\
         ,\"FirstName\":\"James\",\"LastName\":\"Smith\",\"Active\":true,\"Email\"\
@@ -53,7 +53,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=400
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&limit=200&start=400
   response:
     body: {string: "[{\"Id\":\"mVN_YTd4quQ1\",\"UserName\":\"mary.lou@pieshop.net\"\
         ,\"FirstName\":\"Mary\",\"LastName\":\"Lou\",\"Active\":true,\"Email\"\
@@ -76,7 +76,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=600
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&limit=200&start=600
   response:
     body: {string: "[{\"Id\":\"mVN_K4Q4quQ1\",\"UserName\":\"stuart.hirst@pieshop.net\"\
         ,\"FirstName\":\"Stuart\",\"LastName\":\"Hirst\",\"Active\":true,\"Email\"\
@@ -99,7 +99,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=800
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&limit=200&start=800
   response:
     body: {string: "[{\"Id\":\"mVN_K4Q4quQ1\",\"UserName\":\"stuart.hirst@pieshop.net\"\
         ,\"FirstName\":\"Stuart\",\"LastName\":\"Hirst\",\"Active\":true,\"Email\"\
@@ -122,7 +122,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=1000
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&limit=200&start=1000
   response:
     body: {string: '[]'}
     headers:

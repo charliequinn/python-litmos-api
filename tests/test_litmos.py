@@ -1,19 +1,9 @@
 from collections import OrderedDict
 from unittest.mock import patch, Mock
 
+from nose.tools import raises, assert_true, eq_
 
-from nose.tools import raises, eq_, assert_true
-
-from litmos.litmos import Payload, Litmos, LitmosType, LitmosAPI, User
-
-
-class TestPayload:
-    def test_init(self):
-        json_dict = {'variable_name_1': 123.4, 'variable_name_4': 'Test'}
-        payload = Payload(json_dict)
-
-        eq_(payload.variable_name_1, json_dict['variable_name_1'])
-        eq_(payload.variable_name_4, json_dict['variable_name_4'])
+from litmos.litmos import Litmos, LitmosAPI, User
 
 
 class TestLitmos:
@@ -23,15 +13,13 @@ class TestLitmos:
     def test_init(self):
         litmos = Litmos('app-key-123456', 'app-name-123456')
 
-        assert_true(isinstance(litmos.litmos_api, LitmosAPI))
+        eq_(litmos.litmos_api, LitmosAPI)
 
     def test_User(self):
         litmos = Litmos('app-key-123456', 'app-name-123456')
         user = litmos.User
 
-        eq_(type(user), User)
-        eq_(user.resource_name, 'users')
-        eq_(litmos.litmos_api, user.litmos_api)
+        eq_(user, User)
 
     @raises(AttributeError)
     def test_non_acceptable_types(self):
@@ -42,12 +30,6 @@ class TestLitmos:
 class TestLitmosAPI:
     def test_root_url(self):
         eq_(LitmosAPI.ROOT_URL,'https://api.litmos.com/v1.svc/')
-
-    def test_init(self):
-        litmos_api = LitmosAPI('api-key-123', 'app-name-123')
-
-        eq_(litmos_api.api_key, 'api-key-123')
-        eq_(litmos_api.app_name, 'app-name-123')
 
     @patch('litmos.litmos.requests.get')
     def test_all(self, requests_get):
@@ -70,9 +52,10 @@ class TestLitmosAPI:
             )
         ]
 
-        litmos_api = LitmosAPI('api-key-123', 'app-name-123')
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
 
-        eq_(litmos_api.all('pies'),
+        eq_(LitmosAPI().all('pies'),
             [{'UserName': 'john.clark@pieshop.net', 'Id': 'znJcFaXqfWc2'},
              {'UserName': 'john.kent@pieshop.net', 'Id': 'znJcFtPqfWc2'},
              {'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwLlfWc2'}])
@@ -81,9 +64,10 @@ class TestLitmosAPI:
     def test_find_not_found(self, requests_get):
         requests_get.return_value = Mock(status_code=404, text='Not found')
 
-        litmos_api = LitmosAPI('api-key-123', 'app-name-123')
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
 
-        eq_(litmos_api.find('pies', '123'), None)
+        eq_(LitmosAPI().find('pies', '123'), None)
         requests_get.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies/123?apikey=api-key-123&source=app-name-123&format=json'
         )
@@ -95,9 +79,10 @@ class TestLitmosAPI:
             text='{\"Id\":\"znJcFwQqfWc2\",\"UserName\":\"john.smith@pieshop.net\"}'
         )
 
-        litmos_api = LitmosAPI('api-key-123', 'app-name-123')
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
 
-        eq_(litmos_api.find('pies', '345'), {'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwQqfWc2'})
+        eq_(LitmosAPI().find('pies', '345'), {'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwQqfWc2'})
         requests_get.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies/345?apikey=api-key-123&source=app-name-123&format=json'
         )
@@ -109,9 +94,10 @@ class TestLitmosAPI:
             text='[]'
         )
 
-        litmos_api = LitmosAPI('api-key-123', 'app-name-123')
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
 
-        eq_(litmos_api.create('pies', {'Name': 'Cheese & Onion'}), [])
+        eq_(LitmosAPI().create('pies', {'Name': 'Cheese & Onion'}), [])
         requests_post.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies?apikey=api-key-123&source=app-name-123&format=json',
             json={'Name': 'Cheese & Onion'}
@@ -124,29 +110,27 @@ class TestLitmosAPI:
             text='[{\"Id\":\"znJcFwQqfWc2\",\"UserName\":\"john.smith@pieshop.net\"}]'
         )
 
-        litmos_api = LitmosAPI('api-key-123', 'app-name-123')
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
 
-        eq_(litmos_api.search('pies', 'farqhuar'), [{'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwQqfWc2'}])
+        eq_(LitmosAPI().search('pies', 'farqhuar'), [{'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwQqfWc2'}])
         requests_get.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies?apikey=api-key-123&source=app-name-123&format=json&search=farqhuar'
         )
 
 
-class TestLitmosType:
-    def test_init(self):
-        litmos_type = LitmosType('Pie', {'dd': 3})
-
-        eq_(litmos_type.resource_name, 'pies')
-        eq_(litmos_type.litmos_api, {'dd': 3})
-
-
-
 class TestUser:
-    def test_create(self):
-        api_mock = Mock()
+    @patch('litmos.litmos.LitmosAPI')
+    def test_create(self, api_mock):
         api_mock.create.return_value = {"dd": 3}
-        user = User('Pie', api_mock)
 
-        user.create({'UserName': 'paul.smith', 'FirstName': 'Paul'})
+        User.create({'UserName': 'paul.smith', 'FirstName': 'Paul'})
 
-        api_mock.create.assert_called_once_with('pies', OrderedDict([('Id', ''), ('UserName', 'paul.smith'), ('FirstName', 'Paul'), ('LastName', ''), ('FullName', ''), ('Email', ''), ('AccessLevel', 'Learner'), ('DisableMessages', True), ('Active', True), ('Skype', ''), ('PhoneWork', ''), ('PhoneMobile', ''), ('LastLogin', ''), ('LoginKey', ''), ('IsCustomUsername', False), ('Password', ''), ('SkipFirstLogin', True), ('TimeZone', 'UTC'), ('Street1', ''), ('Street2', ''), ('City', ''), ('State', ''), ('PostalCode', ''), ('Country', ''), ('CompanyName', ''), ('JobTitle', ''), ('CustomField1', ''), ('CustomField2', ''), ('CustomField4', ''), ('CustomField5', ''), ('CustomField6', ''), ('CustomField7', ''), ('CustomField8', ''), ('CustomField9', ''), ('CustomField10', ''), ('Culture', '')]))
+        api_mock.create.assert_called_once_with('users', OrderedDict([('Id', ''), ('UserName', 'paul.smith'), ('FirstName', 'Paul'), ('LastName', ''), ('FullName', ''), ('Email', ''), ('AccessLevel', 'Learner'), ('DisableMessages', True), ('Active', True), ('Skype', ''), ('PhoneWork', ''), ('PhoneMobile', ''), ('LastLogin', ''), ('LoginKey', ''), ('IsCustomUsername', False), ('Password', ''), ('SkipFirstLogin', True), ('TimeZone', 'UTC'), ('Street1', ''), ('Street2', ''), ('City', ''), ('State', ''), ('PostalCode', ''), ('Country', ''), ('CompanyName', ''), ('JobTitle', ''), ('CustomField1', ''), ('CustomField2', ''), ('CustomField4', ''), ('CustomField5', ''), ('CustomField6', ''), ('CustomField7', ''), ('CustomField8', ''), ('CustomField9', ''), ('CustomField10', ''), ('Culture', '')]))
+
+    def test_init(self):
+        user = User({'UserName': 'paul.smith', 'FirstName': 'Paul'})
+
+        assert_true(isinstance(user, User))
+        eq_(user.UserName, 'paul.smith')
+        eq_(user.FirstName, 'Paul')

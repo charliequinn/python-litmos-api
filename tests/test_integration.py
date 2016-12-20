@@ -1,58 +1,41 @@
 from nose.tools import eq_
 import vcr
-from collections import OrderedDict
-
 
 from litmos.litmos import Litmos
 
 
 class TestLitmosIntegration():
+    def setUp(self):
+        self.lms = Litmos('app-key12345', 'app-name12345')
+
     @vcr.use_cassette('fixtures/users-all-paginated.yml')
     def test_User_all(self):
-        lms = Litmos('app-key1234', 'app-name12345')
-
-        users = lms.User.all()
+        users = self.lms.User.all()
 
         eq_(len(users), 10)
 
     @vcr.use_cassette('fixtures/teams-all-paginated.yml')
     def test_Team_all(self):
-        lms = Litmos('app-key1234', 'app-name12345')
-
-        teams = lms.Team.all()
+        teams = self.lms.Team.all()
 
         eq_(len(teams), 8)
 
     @vcr.use_cassette('fixtures/users-create.yml')
     def test_User_create(self):
-        lms = Litmos('app-key1234', 'app-name12345')
+        user = self.lms.User.create({
+            'UserName': 'jobaba@skyscanner.net',
+            'FirstName': 'Jo',
+            'LastName': 'Baba',
+            'Email': 'jobaba@skyscanner.net'
+        })
 
-        od = OrderedDict([
-            ("Id", ''),
-            ("UserName", 'john.smith'),
-            ("FirstName", 'John'),
-            ("LastName", 'Smith'),
-            ("FullName", ''),
-            ("Email", 'john.smith@pieshop.com'),
-            ("AccessLevel", 'Learner'),
-            ("DisableMessages", False),
-            ("Active", True),
-            ("LoginKey", ''),
-            ("IsCustomUsername", True),
-            ("SkipFirstLogin", False),
-            ("TimeZone", '')
-        ])
-
-        user = lms.User.create({'UserName': 'jo.ba'})
-
-        eq_(user.UserName,'john.smith')
-        eq_(user.FirstName, 'John')
+        eq_(user.UserName,'jobaba@skyscanner.net')
+        eq_(user.FirstName, 'Jo')
+        eq_(user.Id, 'ZUhjzXUqmTo1')
 
     @vcr.use_cassette('fixtures/search-users.yml')
     def test_User_search(self):
-        lms = Litmos('app-key12345', 'app-name12345')
-
-        users = lms.User.search('charlie.smith@pieshop.net')
+        users = self.lms.User.search('charlie.smith@pieshop.net')
         first_user = users[0]
 
         eq_(len(users), 1)
@@ -67,17 +50,13 @@ class TestLitmosIntegration():
 
     @vcr.use_cassette('fixtures/search-users-not-found.yml')
     def test_User_search_not_found(self):
-        lms = Litmos('app-key12345', 'app-name12345')
-
-        users = lms.User.search('beelzebub@pieshop.net')
+        users = self.lms.User.search('beelzebub@pieshop.net')
 
         eq_(len(users), 0)
 
     @vcr.use_cassette('fixtures/find-user.yml')
     def test_User_find(self):
-        lms = Litmos('app-key12345', 'app-name12345')
-
-        user = lms.User.find('rnjx2WaQOEY1')
+        user = self.lms.User.find('rnjx2WaQOEY1')
 
         eq_(user.Active, True)
         eq_(user.FirstName, 'Janine')

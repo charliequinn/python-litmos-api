@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/teams?apikey=app-key1234&source=app-name12345&format=json&limit=200
+    uri: https://api.litmos.com/v1.svc/teams?apikey=app-key12345&source=app-name12345&format=json&limit=200
   response:
     body: {string: '[{"Id":"y5phW-Iw2lE1","Name":"John Smith","TeamCodeForBulkImport":"405494-JohnSmith"},{"Id":"Yo8Lln12xPo1","Name":"Patti
         Finnegan","TeamCodeForBulkImport":"122536-PatiFinnegan"},{"Id":"XdsSQGcD6-Q1","Name":"Tsukasa
@@ -28,7 +28,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/teams?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=200
+    uri: https://api.litmos.com/v1.svc/teams?apikey=app-key12345&source=app-name12345&format=json&limit=200&start=200
   response:
     body: {string: '[{"Id":"y5phW-Iw2lE1","Name":"John Smith","TeamCodeForBulkImport":"405494-JohnSmith"},{"Id":"Yo8Lln12xPo1","Name":"Patti
         Finnegan","TeamCodeForBulkImport":"122536-PatiFinnegan"},{"Id":"XdsSQGcD6-Q1","Name":"Tsukasa
@@ -49,7 +49,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/teams?apikey=app-key1234&source=app-name12345&format=json&limit=200&start=400
+    uri: https://api.litmos.com/v1.svc/teams?apikey=app-key12345&source=app-name12345&format=json&limit=200&start=400
   response:
     body: {string: '[]'}
     headers:

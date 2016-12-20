@@ -1,25 +1,30 @@
 interactions:
 - request:
-    body: '{"Id": "", "UserName": "john.smith", "FirstName": "John", "LastName": "Smith",
-      "FullName": "", "Email": "john.smith@pieshop.com", "AccessLevel": "Learner",
-      "DisableMessages": false, "Active": true, "LoginKey": "", "IsCustomUsername":
-      true, "SkipFirstLogin": false, "TimeZone": ""}'
+    body: '{"Id": "", "UserName": "jobaba@skyscanner.net", "FirstName": "Jo", "LastName":
+      "Baba", "FullName": "", "Email": "jobaba@skyscanner.net", "AccessLevel": "Learner",
+      "DisableMessages": true, "Active": true, "Skype": "", "PhoneWork": "", "PhoneMobile":
+      "", "LastLogin": "", "LoginKey": "", "IsCustomUsername": false, "Password":
+      "", "SkipFirstLogin": true, "TimeZone": "UTC", "Street1": "", "Street2": "",
+      "City": "", "State": "", "PostalCode": "", "Country": "", "CompanyName": "",
+      "JobTitle": "", "CustomField1": "", "CustomField2": "", "CustomField4": "",
+      "CustomField5": "", "CustomField6": "", "CustomField7": "", "CustomField8":
+      "", "CustomField9": "", "CustomField10": "", "Culture": ""}'
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Content-Length: ['280']
+      Content-Length: ['690']
       Content-Type: [application/json]
       User-Agent: [python-requests/2.12.3]
     method: POST
-    uri: https://api.litmos.com/v1.svc/users?apikey=app-key1234&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json
   response:
-    body: {string: '{"Id":"kNx2k8BJr_I1","UserName":"john.smith","FirstName":"John","LastName":"Smith","FullName":"John
-        Smith","Email":"john.smith@pieshop.com","AccessLevel":"Learner","DisableMessages":false,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"","LoginKey":"https:\/\/piesandbox.litmos.com\/\/login.aspx?loginkey=d22acf05-57f5-43c1-91b9-8277981eb5bd","IsCustomUsername":true,"Password":"","SkipFirstLogin":false,"TimeZone":"UTC","SalesforceId":null,"OriginalId":5077798,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-16T16:26:42Z","Points":0}'}
+    body: {string: '{"Id":"ZUhjzXUqmTo1","UserName":"jobaba@skyscanner.net","FirstName":"Jo","LastName":"Baba","FullName":"Jo
+        Baba","Email":"jobaba@skyscanner.net","AccessLevel":"Learner","DisableMessages":true,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"","LoginKey":"https:\/\/skyscannersandbox.litmos.com\/\/login.aspx?loginkey=c6bc7333-6548-44b5-a497-1cebc07775cc","IsCustomUsername":false,"Password":"","SkipFirstLogin":false,"TimeZone":"UTC","SalesforceId":null,"OriginalId":5090886,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-20T11:41:31Z","Points":0}'}
     headers:
-      Content-Length: ['899']
+      Content-Length: ['903']
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 16 Dec 2016 16:26:42 GMT']
+      Date: ['Tue, 20 Dec 2016 11:41:30 GMT']
       Server: [Microsoft-IIS/7.5]
       X-Powered-By: [ASP.NET]
     status: {code: 201, message: Created}

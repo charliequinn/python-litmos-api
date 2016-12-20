@@ -9,20 +9,18 @@ from copy import copy
 p = inflect.engine()
 
 
-class Payload(object):
-    def __init__(self, j):
-        self.__dict__ = j
-
-
 class Litmos(object):
     ACCEPTABLE_TYPES = ['User', 'Team']
 
     def __init__(self, api_key, app_name):
-        self.litmos_api = LitmosAPI(api_key, app_name)
+        LitmosAPI.api_key = api_key
+        LitmosAPI.app_name = app_name
+
+        self.litmos_api = LitmosAPI
 
     def __getattr__(self, name):
         if name in Litmos.ACCEPTABLE_TYPES:
-            return getattr(sys.modules[__name__], name)(name, self.litmos_api)
+            return getattr(sys.modules[__name__], name)
         else:
             return object.__getattribute__(self, name)
 
@@ -30,25 +28,25 @@ class Litmos(object):
 class LitmosAPI(object):
     ROOT_URL = 'https://api.litmos.com/v1.svc/'
     PAGINATION_OFFSET = 200
+    api_key = None
+    app_name = None
 
-    def __init__(self, api_key, app_name):
-        self.api_key = api_key
-        self.app_name = app_name
-
-    def _base_url(self, resource, **kwargs):
-        return self.ROOT_URL + \
+    @classmethod
+    def _base_url(cls, resource, **kwargs):
+        return cls.ROOT_URL + \
             resource + \
             ("/" + kwargs['resource_id'] if kwargs.get('resource_id', None) else "") + \
-            '?apikey=' + self.api_key + \
-            '&source=' + self.app_name + \
+            '?apikey=' + cls.api_key + \
+            '&source=' + cls.app_name + \
             '&format=json' + \
             ("&search=" + str(kwargs['search_param']) if kwargs.get('search_param', None) else "") + \
             ("&limit=" + str(kwargs['limit']) if kwargs.get('limit', None) else "") + \
             ("&start=" + str(kwargs['start']) if kwargs.get('start', None) else "")
 
-    def find(self, resource, resource_id):
+    @classmethod
+    def find(cls, resource, resource_id):
         response = requests.get(
-            self._base_url(resource, resource_id=resource_id)
+            cls._base_url(resource, resource_id=resource_id)
         )
 
         if response.status_code == 404:
@@ -56,9 +54,10 @@ class LitmosAPI(object):
 
         return json.loads(response.text)
 
-    def create(self, resource, attributes):
+    @classmethod
+    def create(cls, resource, attributes):
         response = requests.post(
-            self._base_url(resource),
+            cls._base_url(resource),
             json=attributes
         )
 
@@ -67,9 +66,10 @@ class LitmosAPI(object):
 
         return json.loads(response.text)
 
-    def search(self, resource, search_param):
+    @classmethod
+    def search(cls, resource, search_param):
         response = requests.get(
-            self._base_url(resource, search_param=search_param)
+            cls._base_url(resource, search_param=search_param)
         )
 
         if response.status_code == 404:
@@ -77,9 +77,10 @@ class LitmosAPI(object):
 
         return json.loads(response.text)
 
-    def _get_all(self, resource, results, start_pos):
+    @classmethod
+    def _get_all(cls, resource, results, start_pos):
         response = requests.get(
-            self._base_url(resource, limit=self.PAGINATION_OFFSET, start=start_pos)
+            cls._base_url(resource, limit=cls.PAGINATION_OFFSET, start=start_pos)
         )
 
         response_list = json.loads(response.text)
@@ -88,43 +89,57 @@ class LitmosAPI(object):
         if not response_list:
             return results
         else:
-            return self._get_all(resource, results, start_pos + self.PAGINATION_OFFSET)
+            return cls._get_all(resource, results, start_pos + cls.PAGINATION_OFFSET)
 
-    def all(self, resource):
-        return self._get_all(resource, [], 0)
+    @classmethod
+    def all(cls, resource):
+        return cls._get_all(resource, [], 0)
 
 
 class LitmosType(object):
-    def __init__(self, object_name, litmos_api):
-        self.resource_name = p.plural(object_name.lower())
-        self.litmos_api = litmos_api
+    def __init__(self, j):
+        self.__dict__ = j
 
-    def find(self, id):
-        return self._parse_response(
-            self.litmos_api.find(self.resource_name, id)
+    @classmethod
+    def name(cls):
+        return p.plural(cls.__name__.lower())
+
+    @classmethod
+    def find(cls, id):
+        return cls._parse_response(
+            LitmosAPI.find(cls.name(), id)
         )
 
-    def all(self):
-        return self._parse_response(
-            self.litmos_api.all(self.resource_name)
+    @classmethod
+    def all(cls):
+        return cls._parse_response(
+            LitmosAPI.all(cls.name())
         )
 
-    def search(self, search_param):
-        return self._parse_response(
-            self.litmos_api.search(self.resource_name, search_param)
+    @classmethod
+    def search(cls, search_param):
+        return cls._parse_response(
+            LitmosAPI.search(cls.name(), search_param)
         )
 
-    def create(self, attributes):
-        return self._parse_response(
-            self.litmos_api.create(self.resource_name, attributes)
+    @classmethod
+    def create(cls, attributes):
+        schema = copy(cls.SCHEMA)
+        for param in schema:
+            attribute_value = attributes.get(param, None)
+            if attribute_value:
+                schema[param] = attribute_value
+
+        return cls._parse_response(
+            LitmosAPI.create(cls.name(), schema)
         )
 
-    @staticmethod
-    def _parse_response(response):
+    @classmethod
+    def _parse_response(cls, response):
         if type(response) is list:
-            return [Payload(elem) for elem in response]
+            return [cls(elem) for elem in response]
         else:
-            return Payload(response)
+            return cls(response)
 
 
 class Team(LitmosType):
@@ -170,12 +185,3 @@ class User(LitmosType):
         ('CustomField10', ''),
         ('Culture', ''),
     ])
-
-    def create(self, attributes):
-        schema = copy(self.SCHEMA)
-        for param in schema:
-            attribute_value = attributes.get(param, None)
-            if attribute_value:
-                schema[param] = attribute_value
-
-        return super().create(schema)
