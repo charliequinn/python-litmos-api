@@ -143,7 +143,11 @@ class LitmosType(object):
 
 
 class Team(LitmosType):
-    pass
+    SCHEMA = OrderedDict([
+        ('Id', ''),
+        ('Name', ''),
+        ('Description', '')
+    ])
 
 
 class User(LitmosType):

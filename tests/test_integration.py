@@ -33,6 +33,17 @@ class TestLitmosIntegration():
         eq_(user.FirstName, 'Jo')
         eq_(user.Id, 'ZUhjzXUqmTo1')
 
+    @vcr.use_cassette('fixtures/teams-create.yml')
+    def test_Team_create(self):
+        team = self.lms.Team.create({
+            'Name': 'jobaba',
+            'Description': 'Jobaba\'s A team'
+        })
+
+        eq_(team.Name,'jobaba')
+        eq_(team.Description, 'Jobaba\'s A team')
+        eq_(team.Id, 'lFRn-Vl4A941')
+
     @vcr.use_cassette('fixtures/search-users.yml')
     def test_User_search(self):
         users = self.lms.User.search('charlie.smith@pieshop.net')
