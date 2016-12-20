@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: '{"Id": "", "UserName": "charlie.quinn123@pieshop.net", "FirstName":
+      "Charlie", "LastName": "Quinn", "FullName": "", "Email": "charlie.quinn123@pieshop.net",
+      "AccessLevel": "Learner", "DisableMessages": true, "Active": true, "Skype":
+      "", "PhoneWork": "", "PhoneMobile": "", "LastLogin": "", "LoginKey": "", "IsCustomUsername":
+      false, "Password": "", "SkipFirstLogin": true, "TimeZone": "UTC", "Street1":
+      "", "Street2": "", "City": "", "State": "", "PostalCode": "", "Country": "",
+      "CompanyName": "", "JobTitle": "", "CustomField1": "", "CustomField2": "", "CustomField4":
+      "", "CustomField5": "", "CustomField6": "", "CustomField7": "", "CustomField8":
+      "", "CustomField9": "", "CustomField10": "", "Culture": ""}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['716']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"-yJ1NfrpHz41","UserName":"charlie.quinn123@pieshop.net","FirstName":"Charlie","LastName":"Quinn","FullName":"Charlie
+        Quinn","Email":"charlie.quinn123@pieshop.net","AccessLevel":"Learner","DisableMessages":true,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"","LoginKey":"https:\/\/pieshop.litmos.com\/\/login.aspx?loginkey=5162288d-fe6b-43f8-95ae-6f26165fb9ab","IsCustomUsername":false,"Password":"","SkipFirstLogin":false,"TimeZone":"UTC","SalesforceId":null,"OriginalId":5091912,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-20T15:24:16Z","Points":0}'}
+    headers:
+      Content-Length: ['935']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 20 Dec 2016 15:24:15 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+version: 1

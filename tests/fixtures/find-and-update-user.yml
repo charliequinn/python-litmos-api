@@ -1,0 +1,48 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&search=charlie.quinn
+  response:
+    body: {string: '[{"Id":"857-AOB444E1","UserName":"charlie.quinn","FirstName":"Charlie","LastName":"Quinn","Active":true,"Email":"charlie.quinn@pieshop.net","AccessLevel":"Account_Owner"},{"Id":"y1vW1y4WYJE1","UserName":"charlie.quinn123","FirstName":"Mark","LastName":"Smith","Active":true,"Email":"charlesquinn1984@gmail.com","AccessLevel":"Learner"},{"Id":"fCbdglG3g9g1","UserName":"charlie.quinn@pieshop.net","FirstName":"Mark","LastName":"Quinn","Active":true,"Email":"Charlie.Quinn@pieshop.net","AccessLevel":"Account_Owner"}]'}
+    headers:
+      Content-Length: ['524']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 20 Dec 2016 15:09:41 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"Id": "857-AOB444E1", "UserName": "charlie.quinn", "FirstName": "Charlie",
+      "LastName": "Quinn", "FullName": "", "Email": "charlie.quinn@pieshop.net",
+      "AccessLevel": "Account_Owner", "DisableMessages": true, "Active": true, "Skype":
+      "skypeeeeeewoo", "PhoneWork": "", "PhoneMobile": "", "LastLogin": "", "LoginKey":
+      "", "IsCustomUsername": false, "Password": "", "SkipFirstLogin": true, "TimeZone":
+      "UTC", "Street1": "", "Street2": "", "City": "", "State": "", "PostalCode":
+      "", "Country": "", "CompanyName": "", "JobTitle": "", "CustomField1": "", "CustomField2":
+      "", "CustomField4": "", "CustomField5": "", "CustomField6": "", "CustomField7":
+      "", "CustomField8": "", "CustomField9": "", "CustomField10": "", "Culture":
+      ""}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['726']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: PUT
+    uri: https://api.litmos.com/v1.svc/users/857-AOB444E1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Tue, 20 Dec 2016 15:09:42 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

@@ -76,7 +76,10 @@ class LitmosAPI(object):
         if response.status_code == 404:
             return None
 
-        return json.loads(response.text)
+        if response.text:
+            return json.loads(response.text)
+        else:
+            return {}
 
 
     @classmethod
@@ -163,11 +166,10 @@ class LitmosType(object):
 
         if self.is_new_record:
             response = LitmosAPI.create(self.__class__.name(), schema)
+            for attr in response:
+                setattr(self, attr, response[attr])
         else:
-            response = LitmosAPI.update(self.__class__.name(), self.Id, schema)
-
-        for attr in response:
-            setattr(self, attr, response[attr])
+            LitmosAPI.update(self.__class__.name(), self.Id, schema)
 
         return True
 

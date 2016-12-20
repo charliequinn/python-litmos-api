@@ -1,4 +1,4 @@
-from nose.tools import eq_
+from nose.tools import eq_, assert_true
 import vcr
 
 from litmos.litmos import Litmos
@@ -23,13 +23,13 @@ class TestLitmosIntegration():
     @vcr.use_cassette('fixtures/users-create.yml')
     def test_User_create(self):
         user = self.lms.User.create({
-            'UserName': 'jobaba@skyscanner.net',
+            'UserName': 'jobaba@pieshop.net',
             'FirstName': 'Jo',
             'LastName': 'Baba',
-            'Email': 'jobaba@skyscanner.net'
+            'Email': 'jobaba@pieshop.net'
         })
 
-        eq_(user.UserName,'jobaba@skyscanner.net')
+        eq_(user.UserName,'jobaba@pieshop.net')
         eq_(user.FirstName, 'Jo')
         eq_(user.Id, 'ZUhjzXUqmTo1')
 
@@ -77,3 +77,23 @@ class TestLitmosIntegration():
         eq_(user.UserName, 'janine.butcher@pieshop.net')
         eq_(user.AccessLevel, 'Learner')
         eq_(user.Email, 'janine.butcher@pieshop.net')
+
+    @vcr.use_cassette('fixtures/find-and-update-user.yml')
+    def test_User_update(self):
+        user = self.lms.User.search('charlie.quinn')[0]
+
+        user.Skype = 'skypeeeeeewoo'
+
+        assert_true(user.save())
+
+    @vcr.use_cassette('fixtures/create-new-user.yml')
+    def test_User_create_new(self):
+        user = self.lms.User()
+
+        user.UserName = 'charlie.quinn123@pieshop.net'
+        user.Email = 'charlie.quinn123@pieshop.net'
+        user.FirstName = 'Charlie'
+        user.LastName = 'Quinn'
+
+        assert_true(user.save())
+        eq_('-yJ1NfrpHz41', user.Id)
