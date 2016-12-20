@@ -1,5 +1,5 @@
-from nose.tools import eq_, assert_true
 import vcr
+from nose.tools import eq_, assert_true
 
 from litmos.litmos import Litmos
 
