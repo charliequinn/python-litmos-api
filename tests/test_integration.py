@@ -1,5 +1,5 @@
 import vcr
-from nose.tools import eq_, assert_true
+from nose.tools import eq_, assert_true, assert_false
 
 from litmos.litmos import Litmos
 
@@ -100,3 +100,15 @@ class TestLitmosIntegration():
 
         assert_true(user.save())
         eq_('-yJ1NfrpHz41', user.Id)
+
+    @vcr.use_cassette('fixtures/deactivate-user.yml')
+    def test_User_deactivate(self):
+        user = self.lms.User.search('paul.smith2')[0]
+
+        assert_true(user.Active)
+
+        user.Active = False
+        assert_true(user.save())
+
+        user = self.lms.User.search('paul.smith2')[0]
+        assert_false(user.Active)

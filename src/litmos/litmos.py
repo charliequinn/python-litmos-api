@@ -36,7 +36,7 @@ class LitmosType(object):
         schema = copy(self.SCHEMA)
         for param in schema:
             attribute_value = getattr(self, param)
-            if attribute_value:
+            if attribute_value is not None:
                 schema[param] = attribute_value
 
         if self.is_new_record:
@@ -148,3 +148,7 @@ class User(LitmosType):
         ('CustomField10', ''),
         ('Culture', ''),
     ])
+
+    def deactivate(self):
+        self.Active = False
+        return self.save()
