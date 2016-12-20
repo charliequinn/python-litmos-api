@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.12.3]
+    method: DELETE
+    uri: https://api.litmos.com/v1.svc/users/YmrD13iZlm41?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Tue, 20 Dec 2016 15:55:32 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

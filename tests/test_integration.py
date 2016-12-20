@@ -44,7 +44,6 @@ class TestLitmosIntegration():
         eq_(team.Description, 'Jobaba\'s A team')
         eq_(team.Id, 'lFRn-Vl4A941')
 
-
     @vcr.use_cassette('fixtures/search-users.yml')
     def test_User_search(self):
         users = self.lms.User.search('charlie.smith@pieshop.net')
@@ -59,6 +58,10 @@ class TestLitmosIntegration():
         eq_(first_user.UserName, 'charlie.smith@pieshop.net')
         eq_(first_user.AccessLevel, 'Account_Owner')
         eq_(first_user.Email, 'charlie.smith@pieshop.net')
+
+    @vcr.use_cassette('fixtures/delete-user.yml')
+    def test_User_delete(self):
+        assert_true(self.lms.User.delete('YmrD13iZlm41'))
 
     @vcr.use_cassette('fixtures/search-users-not-found.yml')
     def test_User_search_not_found(self):

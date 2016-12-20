@@ -55,6 +55,14 @@ class LitmosAPI(object):
         return json.loads(response.text)
 
     @classmethod
+    def delete(cls, resource, resource_id):
+        response = requests.delete(
+            cls._base_url(resource, resource_id=resource_id)
+        )
+
+        return response.status_code == 200
+
+    @classmethod
     def create(cls, resource, attributes):
         response = requests.post(
             cls._base_url(resource),
@@ -144,6 +152,10 @@ class LitmosType(object):
         return cls._parse_response(
             LitmosAPI.search(cls.name(), search_param)
         )
+
+    @classmethod
+    def delete(cls, resource_id):
+        return LitmosAPI.delete(cls.name(), resource_id=resource_id)
 
     @classmethod
     def create(cls, attributes):

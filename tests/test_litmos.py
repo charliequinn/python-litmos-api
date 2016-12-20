@@ -150,6 +150,36 @@ class TestLitmosAPI:
             'https://api.litmos.com/v1.svc/pies?apikey=api-key-123&source=app-name-123&format=json&search=farqhuar'
         )
 
+    @patch('litmos.litmos.requests.delete')
+    def test_delete(self, requests_delete):
+        requests_delete.return_value = Mock(
+            status_code=200,
+            text=''
+        )
+
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
+
+        assert_true(LitmosAPI().delete('pies', 'wsGty'))
+        requests_delete.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies/wsGty?apikey=api-key-123&source=app-name-123&format=json'
+        )
+
+    @patch('litmos.litmos.requests.delete')
+    def test_delete_fail(self, requests_delete):
+        requests_delete.return_value = Mock(
+            status_code=404,
+            text=''
+        )
+
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
+
+        assert_false(LitmosAPI().delete('pies', 'wsGty'))
+        requests_delete.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies/wsGty?apikey=api-key-123&source=app-name-123&format=json'
+        )
+
 
 class TestLitmosType:
     def test_init_empty_attributes(self):
@@ -197,7 +227,7 @@ class TestLitmosType:
 
     @patch('litmos.litmos.LitmosAPI')
     def test_save(self, api_mock):
-        api_mock.update.return_value = {"Id": 'wsGty', "Name": "James"}
+        api_mock.update.return_value = None
         dummy_schema = OrderedDict([('Id', ''),('Name', '')])
         LitmosType.SCHEMA = dummy_schema
         lm = LitmosType({'Id': 'wsGty', 'Name': 'Paul'})
@@ -223,6 +253,14 @@ class TestLitmosType:
         api_mock.create.assert_called_once_with('litmostypes', OrderedDict([('Id', ''), ('Name', 'James123')]))
         assert_true(isinstance(lm, LitmosType))
         eq_(lm.Name, 'James')
+
+    @patch('litmos.litmos.LitmosAPI')
+    def test_delete(self, api_mock):
+        api_mock.delete.return_value = True
+
+        assert_true(LitmosType.delete('wsGty'))
+
+        api_mock.delete.assert_called_once_with('litmostypes', resource_id='wsGty')
 
     @patch('litmos.litmos.LitmosAPI')
     def test_find(self, api_mock):
