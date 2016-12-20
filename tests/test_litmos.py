@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from unittest.mock import patch, Mock
 
-from nose.tools import raises, assert_true, eq_
+from nose.tools import raises, assert_true, assert_false, eq_
 
 from litmos.litmos import Litmos, LitmosAPI, LitmosType
 
@@ -103,6 +103,38 @@ class TestLitmosAPI:
             json={'Name': 'Cheese & Onion'}
         )
 
+    @patch('litmos.litmos.requests.post')
+    def test_create(self, requests_post):
+        requests_post.return_value = Mock(
+            status_code=200,
+            text='[]'
+        )
+
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
+
+        eq_(LitmosAPI().create('pies', {'Name': 'Cheese & Onion'}), [])
+        requests_post.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies?apikey=api-key-123&source=app-name-123&format=json',
+            json={'Name': 'Cheese & Onion'}
+        )
+
+    @patch('litmos.litmos.requests.put')
+    def test_update(self, requests_put):
+        requests_put.return_value = Mock(
+            status_code=200,
+            text='[]'
+        )
+
+        LitmosAPI.api_key = 'api-key-123'
+        LitmosAPI.app_name = 'app-name-123'
+
+        eq_(LitmosAPI().update('pies', '12345', {'Name': 'Cheese & Onion'}), [])
+        requests_put.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies/12345?apikey=api-key-123&source=app-name-123&format=json',
+            json={'Name': 'Cheese & Onion'}
+        )
+
     @patch('litmos.litmos.requests.get')
     def test_search(self, requests_get):
         requests_get.return_value = Mock(
@@ -120,6 +152,15 @@ class TestLitmosAPI:
 
 
 class TestLitmosType:
+    def test_init_empty_attributes(self):
+        dummy_schema = OrderedDict([('Id', ''),('Name', '')])
+        LitmosType.SCHEMA = dummy_schema
+
+        user = LitmosType()
+
+        assert_true(hasattr(user, 'Id'))
+        assert_true(hasattr(user, 'Name'))
+
     def test_init(self):
         user = LitmosType({'UserName': 'paul.smith', 'FirstName': 'Paul'})
 
@@ -129,6 +170,17 @@ class TestLitmosType:
 
     def test_name(self):
         eq_(LitmosType.name(), 'litmostypes')
+
+    def test_new_record_Id_None(self):
+        lm = LitmosType()
+
+        assert_true(lm.is_new_record)
+
+    def test_new_record_Id_Not_None(self):
+        lm = LitmosType()
+        lm.Id = 'wsQa'
+
+        assert_false(lm.is_new_record)
 
     @patch('litmos.litmos.LitmosAPI')
     def test_create(self, api_mock):
@@ -142,6 +194,35 @@ class TestLitmosType:
         assert_true(isinstance(lm, LitmosType))
         eq_(lm.Id, 'ws5tghd')
         eq_(lm.Name, 'Paul')
+
+    @patch('litmos.litmos.LitmosAPI')
+    def test_save(self, api_mock):
+        api_mock.update.return_value = {"Id": 'wsGty', "Name": "James"}
+        dummy_schema = OrderedDict([('Id', ''),('Name', '')])
+        LitmosType.SCHEMA = dummy_schema
+        lm = LitmosType({'Id': 'wsGty', 'Name': 'Paul'})
+        lm.Name = 'James'
+
+        lm.save()
+
+        api_mock.update.assert_called_once_with('litmostypes', 'wsGty', OrderedDict([('Id', 'wsGty'), ('Name', 'James')]))
+        assert_true(isinstance(lm, LitmosType))
+        eq_(lm.Id, 'wsGty')
+        eq_(lm.Name, 'James')
+
+    @patch('litmos.litmos.LitmosAPI')
+    def test_save_new_record(self, api_mock):
+        api_mock.create.return_value = {"Id": 'wsGty123', "Name": "James"}
+        dummy_schema = OrderedDict([('Id', ''),('Name', '')])
+        LitmosType.SCHEMA = dummy_schema
+        lm = LitmosType()
+        lm.Name = 'James123'
+
+        lm.save()
+
+        api_mock.create.assert_called_once_with('litmostypes', OrderedDict([('Id', ''), ('Name', 'James123')]))
+        assert_true(isinstance(lm, LitmosType))
+        eq_(lm.Name, 'James')
 
     @patch('litmos.litmos.LitmosAPI')
     def test_find(self, api_mock):

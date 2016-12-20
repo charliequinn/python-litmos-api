@@ -67,6 +67,19 @@ class LitmosAPI(object):
         return json.loads(response.text)
 
     @classmethod
+    def update(cls, resource, resource_id, attributes):
+        response = requests.put(
+            cls._base_url(resource, resource_id=resource_id),
+            json=attributes
+        )
+
+        if response.status_code == 404:
+            return None
+
+        return json.loads(response.text)
+
+
+    @classmethod
     def search(cls, resource, search_param):
         response = requests.get(
             cls._base_url(resource, search_param=search_param)
@@ -97,8 +110,15 @@ class LitmosAPI(object):
 
 
 class LitmosType(object):
-    def __init__(self, j):
-        self.__dict__ = j
+    def __init__(self, attributes={}):
+        self.__dict__ = dict(self.SCHEMA)
+
+        for attr in attributes:
+            setattr(self, attr, attributes[attr])
+
+    @property
+    def is_new_record(self):
+        return not self.Id
 
     @classmethod
     def name(cls):
@@ -133,6 +153,23 @@ class LitmosType(object):
         return cls._parse_response(
             LitmosAPI.create(cls.name(), schema)
         )
+
+    def save(self):
+        schema = copy(self.SCHEMA)
+        for param in schema:
+            attribute_value = getattr(self, param)
+            if attribute_value:
+                schema[param] = attribute_value
+
+        if self.is_new_record:
+            response = LitmosAPI.create(self.__class__.name(), schema)
+        else:
+            response = LitmosAPI.update(self.__class__.name(), self.Id, schema)
+
+        for attr in response:
+            setattr(self, attr, response[attr])
+
+        return True
 
     @classmethod
     def _parse_response(cls, response):

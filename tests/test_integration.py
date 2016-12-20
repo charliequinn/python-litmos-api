@@ -44,6 +44,7 @@ class TestLitmosIntegration():
         eq_(team.Description, 'Jobaba\'s A team')
         eq_(team.Id, 'lFRn-Vl4A941')
 
+
     @vcr.use_cassette('fixtures/search-users.yml')
     def test_User_search(self):
         users = self.lms.User.search('charlie.smith@pieshop.net')
