@@ -11,7 +11,7 @@ Overview
       - |docs|
     * - tests
       - | |travis|
-        | |coveralls| |codecov|
+        | |coveralls|
         | |landscape|
     * - package
       - |version| |downloads| |wheel| |supported-versions| |supported-implementations|
