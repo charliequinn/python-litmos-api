@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from unittest.mock import patch, Mock
 
 from nose.tools import eq_, assert_true, assert_false
@@ -158,13 +159,41 @@ class TestLitmosAPI:
     def test_add_sub_resource(self, requests_post):
         requests_post.return_value = Mock(
             status_code=201,
-            text=''
+            text='{\"Id\": \"1234rf\", \"Name\": \"Charlie\"}'
         )
 
-        assert_true(
-            API.add_sub_resource('pies', 'wsGty', 'eaters', {'Id': 'fgUr3', 'Name': 'Charlie'})
+        eq_(
+            API.add_sub_resource('pies', 'wsGty', 'eaters', {'Id': '', 'Name': 'Charlie'}),
+            {'Id': '1234rf', 'Name': 'Charlie'}
         )
         requests_post.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
-            json={'Id': 'fgUr3', 'Name': 'Charlie'}
+            json={'Id': '', 'Name': 'Charlie'}
+        )
+    @patch('litmos.api.requests.post')
+    def test_add_sub_resource_list(self, requests_post):
+        requests_post.return_value = Mock(
+            status_code=201,
+            text=''
+        )
+
+        result = API.add_sub_resource('pies',
+                                 'wsGty',
+                                 'eaters',
+                                 [
+                                    OrderedDict([('Id', 'wser4351'),
+                                                 ('UserName', 'paul.smith1'),
+                                                 ('FirstName', 'Paul1'),
+                                                 ('LastName', 'Smith1')]),
+                                    OrderedDict([('Id', 'wser435'),
+                                                 ('UserName', 'paul.smith'),
+                                                 ('FirstName', 'Paul'),
+                                                 ('LastName', 'Smith')])
+                                 ]
+                                 ),
+
+        assert_true(result)
+        requests_post.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
+            json=[OrderedDict([('Id', 'wser4351'), ('UserName', 'paul.smith1'), ('FirstName', 'Paul1'), ('LastName', 'Smith1')]), OrderedDict([('Id', 'wser435'), ('UserName', 'paul.smith'), ('FirstName', 'Paul'), ('LastName', 'Smith')])]
         )

@@ -108,6 +108,13 @@ class Team(LitmosType):
         ('Description', '')
     ])
 
+    USER_SCHEMA = OrderedDict([
+        ('Id', ''),
+        ('UserName', ''),
+        ('FirstName', ''),
+        ('LastName', '')
+    ])
+
     def sub_teams(self):
         return self.__class__._parse_response(
             API.get_sub_resource(
@@ -117,19 +124,6 @@ class Team(LitmosType):
             )
         )
 
-    def add_sub_team(self, team):
-        schema = copy(self.SCHEMA)
-        for param in schema:
-            attribute_value = getattr(team, param)
-            if attribute_value is not None:
-                schema[param] = attribute_value
-
-        API.add_child(
-            self.__class__.name(),
-            self.Id,
-            schema
-        )
-
     def users(self):
         return User._parse_response(
             API.get_sub_resource(
@@ -137,6 +131,42 @@ class Team(LitmosType):
                 self.Id,
                 'users'
             )
+        )
+
+    def add_sub_team(self, sub_team):
+        schema = copy(self.SCHEMA)
+        for param in schema:
+            attribute_value = getattr(sub_team, param)
+            if attribute_value is not None:
+                schema[param] = attribute_value
+
+        sub_team = self.__class__._parse_response(
+            API.add_sub_resource(
+                self.__class__.name(),
+                self.Id,
+                self.__class__.name(),
+                schema
+            )
+        )
+
+        return sub_team.Id
+
+    def add_users(self, users):
+        user_list = []
+        for user in users:
+            schema = copy(self.USER_SCHEMA)
+            for param in schema:
+                attribute_value = getattr(user, param)
+                if attribute_value is not None:
+                    schema[param] = attribute_value
+
+            user_list.append(schema)
+
+        return API.add_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            user.__class__.name(),
+            user_list
         )
 
 

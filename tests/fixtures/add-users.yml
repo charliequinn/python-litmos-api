@@ -1,0 +1,99 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"JyLa085jwVs1","Name":"Max Chandler","Description":""}'}
+    headers:
+      Content-Length: ['61']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 12:49:01 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"Id": "", "UserName": "jobaba1@pieshop.net", "FirstName": "Jo", "LastName":
+      "Baba1", "FullName": "", "Email": "jobaba1@pieshop.net", "AccessLevel": "Learner",
+      "DisableMessages": true, "Active": true, "Skype": "", "PhoneWork": "", "PhoneMobile":
+      "", "LastLogin": "", "LoginKey": "", "IsCustomUsername": false, "Password":
+      "", "SkipFirstLogin": true, "TimeZone": "UTC", "Street1": "", "Street2": "",
+      "City": "", "State": "", "PostalCode": "", "Country": "", "CompanyName": "",
+      "JobTitle": "", "CustomField1": "", "CustomField2": "", "CustomField4": "",
+      "CustomField5": "", "CustomField6": "", "CustomField7": "", "CustomField8":
+      "", "CustomField9": "", "CustomField10": "", "Culture": ""}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['687']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"cY6aotmMBXI1","UserName":"jobaba1@pieshop.net","FirstName":"Jo","LastName":"Baba1","FullName":"Jo
+        Baba1","Email":"jobaba1@pieshop.net","AccessLevel":"Learner","DisableMessages":true,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"","LoginKey":"https:\/\/app-name12345\/\/login.aspx?loginkey=a83e5530-db1a-49d2-ab61-afa59655641c","IsCustomUsername":false,"Password":"","SkipFirstLogin":false,"TimeZone":"UTC","SalesforceId":null,"OriginalId":5098414,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-21T12:49:02Z","Points":0}'}
+    headers:
+      Content-Length: ['901']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 12:49:01 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: '{"Id": "", "UserName": "jobaba2@pieshop.net", "FirstName": "Jo", "LastName":
+      "Baba2", "FullName": "", "Email": "jobaba2@pieshop.net", "AccessLevel": "Learner",
+      "DisableMessages": true, "Active": true, "Skype": "", "PhoneWork": "", "PhoneMobile":
+      "", "LastLogin": "", "LoginKey": "", "IsCustomUsername": false, "Password":
+      "", "SkipFirstLogin": true, "TimeZone": "UTC", "Street1": "", "Street2": "",
+      "City": "", "State": "", "PostalCode": "", "Country": "", "CompanyName": "",
+      "JobTitle": "", "CustomField1": "", "CustomField2": "", "CustomField4": "",
+      "CustomField5": "", "CustomField6": "", "CustomField7": "", "CustomField8":
+      "", "CustomField9": "", "CustomField10": "", "Culture": ""}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['687']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"A5WgbmCW_QY1","UserName":"jobaba2@pieshop.net","FirstName":"Jo","LastName":"Baba2","FullName":"Jo
+        Baba2","Email":"jobaba2@pieshop.net","AccessLevel":"Learner","DisableMessages":true,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"","LoginKey":"https:\/\/app-name12345\/\/login.aspx?loginkey=ca4a05ea-3749-4770-9f2a-b3bbcda48660","IsCustomUsername":false,"Password":"","SkipFirstLogin":false,"TimeZone":"UTC","SalesforceId":null,"OriginalId":5098415,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-21T12:49:03Z","Points":0}'}
+    headers:
+      Content-Length: ['901']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 12:49:02 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: '[{"Id": "cY6aotmMBXI1", "UserName": "jobaba1@pieshop.net", "FirstName":
+      "Jo", "LastName": "Baba1"}, {"Id": "A5WgbmCW_QY1", "UserName": "jobaba2@pieshop.net",
+      "FirstName": "Jo", "LastName": "Baba2"}]'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['198']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 12:49:02 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+version: 1

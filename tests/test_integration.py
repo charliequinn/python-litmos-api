@@ -130,3 +130,38 @@ class TestLitmosIntegration():
 
         assert_true(isinstance(users[0], User))
         eq_(len(users), 3)
+
+    @vcr.use_cassette('fixtures/add-sub-team.yml')
+    def test_add_sub_team(self):
+        team = self.lms.Team.find('JyLa085jwVs1')
+
+        sub_team = self.lms.Team()
+        sub_team.Name = 'Bob\'s A-Team'
+        sub_team.Description = 'Make Pies Great Again'
+
+        sub_team_id = team.add_sub_team(sub_team)
+
+        eq_(sub_team_id, 'L4NTbLzz7rI1')
+
+    @vcr.use_cassette('fixtures/add-users.yml')
+    def test_add_users(self):
+        team = self.lms.Team.find('JyLa085jwVs1')
+
+        team_member1 = self.lms.User.create({
+            'UserName': 'jobaba1@pieshop.net',
+            'FirstName': 'Jo',
+            'LastName': 'Baba1',
+            'Email': 'jobaba1@pieshop.net'
+        })
+
+        team_member2 = self.lms.User.create({
+            'UserName': 'jobaba2@pieshop.net',
+            'FirstName': 'Jo',
+            'LastName': 'Baba2',
+            'Email': 'jobaba2@pieshop.net'
+        })
+
+        assert_true(
+            team.add_users([team_member1,
+                            team_member2])
+        )

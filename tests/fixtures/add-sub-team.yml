@@ -1,0 +1,41 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"JyLa085jwVs1","Name":"Ruth Chandler","Description":""}'}
+    headers:
+      Content-Length: ['61']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 12:11:49 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"Id": "", "Name": "Bob''s A-Team", "Description": "Make Pies Great Again"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['74']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1/teams?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"L4NTbLzz7rI1","Name":"Bob''s A-Team","Description":"Make
+        Pies Great Again"}'}
+    headers:
+      Content-Length: ['81']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 12:11:49 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+version: 1

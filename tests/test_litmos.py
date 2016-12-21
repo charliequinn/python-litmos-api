@@ -206,12 +206,34 @@ class TestTeam:
 
     @patch('litmos.litmos.API')
     def test_add_sub_team(self, api_mock):
-        api_mock.add_child.return_value = True
+        api_mock.add_sub_resource.return_value = {'Id':'wsd456Yh', 'Name': 'SubTeam1', 'Description': 'SS'}
 
         team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
 
         sub_team = Team({'Name': 'SubTeam1'})
 
-        team.add_sub_team(sub_team)
+        eq_(sub_team.Id, '')
 
-        api_mock.add_child.assert_called_once_with('teams', 'fgUr1', OrderedDict([('Id', ''), ('Name', 'SubTeam1'), ('Description', '')]))
+        new_sub_team_id = team.add_sub_team(sub_team)
+
+        eq_(new_sub_team_id, 'wsd456Yh')
+        api_mock.add_sub_resource.assert_called_once_with('teams', 'fgUr1', 'teams', OrderedDict([('Id', ''), ('Name', 'SubTeam1'), ('Description', '')]))
+
+    @patch('litmos.litmos.API')
+    def test_add_users(self, api_mock):
+        api_mock.add_sub_resource.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        user1 = User({'FirstName': 'Paul1', 'LastName': 'Smith1', 'UserName': 'paul.smith1', 'Id': 'wser4351'})
+        user2 = User({'FirstName': 'Paul', 'LastName': 'Smith', 'UserName': 'paul.smith', 'Id': 'wser435'})
+
+        assert_true(team.add_users([user1, user2]))
+
+        api_mock.add_sub_resource.assert_called_once_with(
+            'teams',
+            'fgUr1',
+            'users',
+            [OrderedDict([('Id', 'wser4351'), ('UserName', 'paul.smith1'), ('FirstName', 'Paul1'), ('LastName', 'Smith1')]),
+             OrderedDict([('Id', 'wser435'), ('UserName', 'paul.smith'), ('FirstName', 'Paul'), ('LastName', 'Smith')])]
+        )

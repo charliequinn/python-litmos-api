@@ -135,4 +135,9 @@ class API(object):
             json=attributes
         )
 
-        return response.status_code == 201
+        if response.status_code is not 201:
+            return False
+        elif not response.text:
+            return True
+        else:
+            return json.loads(response.text)
