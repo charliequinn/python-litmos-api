@@ -28,10 +28,6 @@ Overview
     :alt: Coverage Status
     :target: https://coveralls.io/r/charliequinn/python-litmos-api
 
-.. |codecov| image:: https://codecov.io/github/charliequinn/python-litmos-api/coverage.svg?branch=master
-    :alt: Coverage Status
-    :target: https://codecov.io/github/charliequinn/python-litmos-api
-
 .. |landscape| image:: https://landscape.io/github/charliequinn/python-litmos-api/master/landscape.svg?style=flat
     :target: https://landscape.io/github/charliequinn/python-litmos-api/master
     :alt: Code Quality Status
