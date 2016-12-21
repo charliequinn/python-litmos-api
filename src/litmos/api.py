@@ -14,6 +14,7 @@ class API(object):
         return cls.ROOT_URL + \
             resource + \
             ("/" + kwargs['resource_id'] if kwargs.get('resource_id', None) else "") + \
+            ("/" + kwargs['sub_resource'] if kwargs.get('sub_resource', None) else "") + \
             '?apikey=' + cls.api_key + \
             '&source=' + cls.app_name + \
             '&format=json' + \
@@ -96,3 +97,25 @@ class API(object):
     @classmethod
     def all(cls, resource):
         return cls._get_all(resource, [], 0)
+
+    @classmethod
+    def get_children(cls, resource, resource_id):
+        response = requests.get(
+            cls._base_url(resource, resource_id=resource_id, sub_resource=resource)
+        )
+
+        if response.status_code == 404:
+            return None
+
+        return json.loads(response.text)
+
+    @classmethod
+    def get_sub_resource(cls, resource, resource_id, sub_resource):
+        response = requests.get(
+            cls._base_url(resource, resource_id=resource_id, sub_resource=sub_resource)
+        )
+
+        if response.status_code == 404:
+            return None
+
+        return json.loads(response.text)

@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from nose.tools import raises, assert_true, assert_false, eq_
 
-from litmos.litmos import Litmos, LitmosType, User
+from litmos.litmos import Litmos, LitmosType, User, Team
 from litmos.api import API
 
 
@@ -171,3 +171,46 @@ class TestUser:
         assert_true(user.deactivate())
 
         api_mock.update.assert_called_once_with('users', 'wsGth', OrderedDict([('Id', 'wsGth'), ('UserName', ''), ('FirstName', ''), ('LastName', ''), ('FullName', ''), ('Email', ''), ('AccessLevel', 'Learner'), ('DisableMessages', True), ('Active', False), ('Skype', ''), ('PhoneWork', ''), ('PhoneMobile', ''), ('LastLogin', ''), ('LoginKey', ''), ('IsCustomUsername', False), ('Password', ''), ('SkipFirstLogin', True), ('TimeZone', 'UTC'), ('Street1', ''), ('Street2', ''), ('City', ''), ('State', ''), ('PostalCode', ''), ('Country', ''), ('CompanyName', ''), ('JobTitle', ''), ('CustomField1', ''), ('CustomField2', ''), ('CustomField4', ''), ('CustomField5', ''), ('CustomField6', ''), ('CustomField7', ''), ('CustomField8', ''), ('CustomField9', ''), ('CustomField10', ''), ('Culture', '')]))
+
+
+class TestTeam:
+    @patch('litmos.litmos.API')
+    def test_subteams(self, api_mock):
+        api_mock.get_children.return_value = [
+            {'Id': 'fgUr3', 'Name': 'SubTeam1'},
+            {'Id': 'fgUr2', 'Name': 'SubTeam2'}
+        ]
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        subteams = team.sub_teams()
+
+        eq_(2, len(subteams))
+        api_mock.get_children.assert_called_once_with('teams', 'fgUr1')
+
+    @patch('litmos.litmos.API')
+    def test_users(self, api_mock):
+        api_mock.get_sub_resource.return_value = [
+            {'Id': 'fgUr3', 'Name': 'SubTeam1'},
+            {'Id': 'fgUr2', 'Name': 'SubTeam2'}
+        ]
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        users = team.users()
+
+        eq_(len(users), 2)
+        eq_('fgUr3', users[0].Id)
+
+        api_mock.get_sub_resource.assert_called_once_with('teams', 'fgUr1', 'users')
+    #
+    # @patch('litmos.litmos.API')
+    # def test_create_sub_team(self, api_mock):
+    #     api_mock.create_sub_resource.return_value = True
+    #
+    #     team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+    #
+    #     users = team.create_sub_team()
+    #
+    #     api_mock.create_sub_resource.assert_called_once_with('teams', 'fgUr1', 'users')
+    #

@@ -1,0 +1,38 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"JyLa015jwVs1","Name":"Max Chandler","Description":""}'}
+    headers:
+      Content-Length: ['61']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 10:55:19 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/teams/JyLa015jwVs1/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '[{"Id":"zjWTVhcqs981","UserName":"caroline.ross@pieshop.net","FirstName":"Caroline","LastName":"Ross","Active":true,"Email":"caroline.ross@pieshop.net","AccessLevel":"Team_Leader"},{"Id":"fS3A7u1I1-41","UserName":"chris.williams@pieshop.net","FirstName":"Chris","LastName":"Williams","Active":true,"Email":"chris.williams@pieshop.net","AccessLevel":"Team_Leader"},{"Id":"wtMQOFamSas1","UserName":"max.chandler@pieshop.net","FirstName":"Max","LastName":"Chandler","Active":true,"Email":"max.chandler@pieshop.net","AccessLevel":"Team_Leader"}]'}
+    headers:
+      Content-Length: ['562']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 10:55:19 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

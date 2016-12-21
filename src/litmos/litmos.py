@@ -108,6 +108,23 @@ class Team(LitmosType):
         ('Description', '')
     ])
 
+    def sub_teams(self):
+        return self.__class__._parse_response(
+            API.get_children(
+                self.__class__.name(),
+                self.Id
+            )
+        )
+
+    def users(self):
+        return User._parse_response(
+            API.get_sub_resource(
+                self.__class__.name(),
+                self.Id,
+                'users'
+            )
+        )
+
 
 class User(LitmosType):
     SCHEMA = OrderedDict([

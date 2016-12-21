@@ -1,7 +1,7 @@
 import vcr
 from nose.tools import eq_, assert_true, assert_false
 
-from litmos.litmos import Litmos
+from litmos.litmos import Litmos, User, Team
 
 
 class TestLitmosIntegration():
@@ -112,3 +112,21 @@ class TestLitmosIntegration():
 
         user = self.lms.User.search('paul.smith2')[0]
         assert_false(user.Active)
+
+    @vcr.use_cassette('fixtures/get-sub-teams.yml')
+    def test_get_subteams(self):
+        team = self.lms.Team.find('JyLa085jwVs1')
+
+        teams = team.sub_teams()
+
+        assert_true(isinstance(teams[0], Team))
+        eq_(len(teams), 2)
+
+    @vcr.use_cassette('fixtures/get-team-users.yml')
+    def test_get_users(self):
+        team = self.lms.Team.find('JyLa085jwVs1')
+
+        users = team.users()
+
+        assert_true(isinstance(users[0], User))
+        eq_(len(users), 3)

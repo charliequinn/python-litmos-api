@@ -157,3 +157,45 @@ class TestLitmosAPI:
         requests_delete.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies/wsGty?apikey=api-key-123&source=app-name-123&format=json'
         )
+
+    @patch('litmos.api.requests.get')
+    def test_get_sub_resource(self, requests_get):
+        requests_get.return_value = Mock(
+            status_code=200,
+            text='[{\"Id\": \"fgUr3\", \"Name\": \"SubTeam1\"},{\"Id\": \"fgUr2\", \"Name\": \"SubTeam2\"}]'
+        )
+
+        API.api_key = 'api-key-123'
+        API.app_name = 'app-name-123'
+
+        eq_(
+            API().get_children('pies', 'wsGty'),
+            [
+                {'Id': 'fgUr3', 'Name': 'SubTeam1'},
+                {'Id': 'fgUr2', 'Name': 'SubTeam2'}
+            ]
+        )
+        requests_get.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies/wsGty/pies?apikey=api-key-123&source=app-name-123&format=json'
+        )
+
+    @patch('litmos.api.requests.get')
+    def test_get_sub_resource(self, requests_get):
+        requests_get.return_value = Mock(
+            status_code=200,
+            text='[{\"Id\": \"fgUr3\", \"Name\": \"Charlie\"},{\"Id\": \"fgUr2\", \"Name\": \"John\"}]'
+        )
+
+        API.api_key = 'api-key-123'
+        API.app_name = 'app-name-123'
+
+        eq_(
+            API().get_sub_resource('pies', 'wsGty', 'eaters'),
+            [
+                {'Id': 'fgUr3', 'Name': 'Charlie'},
+                {'Id': 'fgUr2', 'Name': 'John'}
+            ]
+        )
+        requests_get.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json'
+        )
