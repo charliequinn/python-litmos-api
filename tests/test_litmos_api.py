@@ -6,6 +6,11 @@ from litmos.api import API
 
 
 class TestLitmosAPI:
+    @classmethod
+    def setUpClass(cls):
+        API.api_key = 'api-key-123'
+        API.app_name = 'app-name-123'
+
     def test_root_url(self):
         eq_(API.ROOT_URL, 'https://api.litmos.com/v1.svc/')
 
@@ -30,9 +35,6 @@ class TestLitmosAPI:
             )
         ]
 
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
-
         eq_(API().all('pies'),
             [{'UserName': 'john.clark@pieshop.net', 'Id': 'znJcFaXqfWc2'},
              {'UserName': 'john.kent@pieshop.net', 'Id': 'znJcFtPqfWc2'},
@@ -41,9 +43,6 @@ class TestLitmosAPI:
     @patch('litmos.api.requests.get')
     def test_find_not_found(self, requests_get):
         requests_get.return_value = Mock(status_code=404, text='Not found')
-
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
 
         eq_(API().find('pies', '123'), None)
         requests_get.assert_called_once_with(
@@ -57,9 +56,6 @@ class TestLitmosAPI:
             text='{\"Id\":\"znJcFwQqfWc2\",\"UserName\":\"john.smith@pieshop.net\"}'
         )
 
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
-
         eq_(API().find('pies', '345'), {'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwQqfWc2'})
         requests_get.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies/345?apikey=api-key-123&source=app-name-123&format=json'
@@ -71,9 +67,6 @@ class TestLitmosAPI:
             status_code=200,
             text='[]'
         )
-
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
 
         eq_(API().create('pies', {'Name': 'Cheese & Onion'}), [])
         requests_post.assert_called_once_with(
@@ -87,9 +80,6 @@ class TestLitmosAPI:
             status_code=200,
             text='[]'
         )
-
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
 
         eq_(API().create('pies', {'Name': 'Cheese & Onion'}), [])
         requests_post.assert_called_once_with(
@@ -104,9 +94,6 @@ class TestLitmosAPI:
             text='[]'
         )
 
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
-
         eq_(API().update('pies', '12345', {'Name': 'Cheese & Onion'}), [])
         requests_put.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies/12345?apikey=api-key-123&source=app-name-123&format=json',
@@ -120,9 +107,6 @@ class TestLitmosAPI:
             text='[{\"Id\":\"znJcFwQqfWc2\",\"UserName\":\"john.smith@pieshop.net\"}]'
         )
 
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
-
         eq_(API().search('pies', 'farqhuar'), [{'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwQqfWc2'}])
         requests_get.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies?apikey=api-key-123&source=app-name-123&format=json&search=farqhuar'
@@ -134,9 +118,6 @@ class TestLitmosAPI:
             status_code=200,
             text=''
         )
-
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
 
         assert_true(API().delete('pies', 'wsGty'))
         requests_delete.assert_called_once_with(
@@ -150,9 +131,6 @@ class TestLitmosAPI:
             text=''
         )
 
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
-
         assert_false(API().delete('pies', 'wsGty'))
         requests_delete.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies/wsGty?apikey=api-key-123&source=app-name-123&format=json'
@@ -162,32 +140,8 @@ class TestLitmosAPI:
     def test_get_sub_resource(self, requests_get):
         requests_get.return_value = Mock(
             status_code=200,
-            text='[{\"Id\": \"fgUr3\", \"Name\": \"SubTeam1\"},{\"Id\": \"fgUr2\", \"Name\": \"SubTeam2\"}]'
-        )
-
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
-
-        eq_(
-            API().get_children('pies', 'wsGty'),
-            [
-                {'Id': 'fgUr3', 'Name': 'SubTeam1'},
-                {'Id': 'fgUr2', 'Name': 'SubTeam2'}
-            ]
-        )
-        requests_get.assert_called_once_with(
-            'https://api.litmos.com/v1.svc/pies/wsGty/pies?apikey=api-key-123&source=app-name-123&format=json'
-        )
-
-    @patch('litmos.api.requests.get')
-    def test_get_sub_resource(self, requests_get):
-        requests_get.return_value = Mock(
-            status_code=200,
             text='[{\"Id\": \"fgUr3\", \"Name\": \"Charlie\"},{\"Id\": \"fgUr2\", \"Name\": \"John\"}]'
         )
-
-        API.api_key = 'api-key-123'
-        API.app_name = 'app-name-123'
 
         eq_(
             API().get_sub_resource('pies', 'wsGty', 'eaters'),
@@ -198,4 +152,19 @@ class TestLitmosAPI:
         )
         requests_get.assert_called_once_with(
             'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json'
+        )
+
+    @patch('litmos.api.requests.post')
+    def test_add_sub_resource(self, requests_post):
+        requests_post.return_value = Mock(
+            status_code=201,
+            text=''
+        )
+
+        assert_true(
+            API.add_sub_resource('pies', 'wsGty', 'eaters', {'Id': 'fgUr3', 'Name': 'Charlie'})
+        )
+        requests_post.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
+            json={'Id': 'fgUr3', 'Name': 'Charlie'}
         )

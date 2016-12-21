@@ -112,10 +112,27 @@ class API(object):
     @classmethod
     def get_sub_resource(cls, resource, resource_id, sub_resource):
         response = requests.get(
-            cls._base_url(resource, resource_id=resource_id, sub_resource=sub_resource)
+            cls._base_url(
+                resource,
+                resource_id=resource_id,
+                sub_resource=sub_resource
+            )
         )
 
         if response.status_code == 404:
             return None
 
         return json.loads(response.text)
+
+    @classmethod
+    def add_sub_resource(cls, resource, resource_id, sub_resource, attributes):
+        response = requests.post(
+            cls._base_url(
+                resource,
+                resource_id=resource_id,
+                sub_resource=sub_resource
+            ),
+            json=attributes
+        )
+
+        return response.status_code == 201

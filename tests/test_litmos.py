@@ -176,7 +176,7 @@ class TestUser:
 class TestTeam:
     @patch('litmos.litmos.API')
     def test_subteams(self, api_mock):
-        api_mock.get_children.return_value = [
+        api_mock.get_sub_resource.return_value = [
             {'Id': 'fgUr3', 'Name': 'SubTeam1'},
             {'Id': 'fgUr2', 'Name': 'SubTeam2'}
         ]
@@ -186,7 +186,7 @@ class TestTeam:
         subteams = team.sub_teams()
 
         eq_(2, len(subteams))
-        api_mock.get_children.assert_called_once_with('teams', 'fgUr1')
+        api_mock.get_sub_resource.assert_called_once_with('teams', 'fgUr1', 'teams')
 
     @patch('litmos.litmos.API')
     def test_users(self, api_mock):
@@ -203,14 +203,15 @@ class TestTeam:
         eq_('fgUr3', users[0].Id)
 
         api_mock.get_sub_resource.assert_called_once_with('teams', 'fgUr1', 'users')
-    #
-    # @patch('litmos.litmos.API')
-    # def test_create_sub_team(self, api_mock):
-    #     api_mock.create_sub_resource.return_value = True
-    #
-    #     team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
-    #
-    #     users = team.create_sub_team()
-    #
-    #     api_mock.create_sub_resource.assert_called_once_with('teams', 'fgUr1', 'users')
-    #
+
+    @patch('litmos.litmos.API')
+    def test_add_sub_team(self, api_mock):
+        api_mock.add_child.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        sub_team = Team({'Name': 'SubTeam1'})
+
+        team.add_sub_team(sub_team)
+
+        api_mock.add_child.assert_called_once_with('teams', 'fgUr1', OrderedDict([('Id', ''), ('Name', 'SubTeam1'), ('Description', '')]))

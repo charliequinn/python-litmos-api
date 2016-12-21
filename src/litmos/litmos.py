@@ -110,10 +110,24 @@ class Team(LitmosType):
 
     def sub_teams(self):
         return self.__class__._parse_response(
-            API.get_children(
+            API.get_sub_resource(
                 self.__class__.name(),
-                self.Id
+                self.Id,
+                self.__class__.name()
             )
+        )
+
+    def add_sub_team(self, team):
+        schema = copy(self.SCHEMA)
+        for param in schema:
+            attribute_value = getattr(team, param)
+            if attribute_value is not None:
+                schema[param] = attribute_value
+
+        API.add_child(
+            self.__class__.name(),
+            self.Id,
+            schema
         )
 
     def users(self):
