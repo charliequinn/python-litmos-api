@@ -133,6 +133,15 @@ class Team(LitmosType):
             )
         )
 
+    def leaders(self):
+        return User._parse_response(
+            API.get_sub_resource(
+                self.__class__.name(),
+                self.Id,
+                'leaders'
+            )
+        )
+
     def add_sub_team(self, sub_team):
         schema = copy(self.SCHEMA)
         for param in schema:
@@ -167,6 +176,30 @@ class Team(LitmosType):
             self.Id,
             user.__class__.name(),
             user_list
+        )
+
+    def remove_user(self, user):
+        return API.remove_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            'users',
+            user.Id
+        )
+
+    def promote_team_leader(self, user):
+        return API.update_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            'leaders',
+            user.Id
+        )
+
+    def demote_team_leader(self, user):
+        return API.remove_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            'leaders',
+            user.Id
         )
 
 
@@ -213,3 +246,11 @@ class User(LitmosType):
     def deactivate(self):
         self.Active = False
         return self.save()
+
+    def remove_teams(self):
+        return API.remove_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            'teams',
+            None
+        )

@@ -137,6 +137,18 @@ class TestLitmosAPI:
             'https://api.litmos.com/v1.svc/pies/wsGty?apikey=api-key-123&source=app-name-123&format=json'
         )
 
+    @patch('litmos.api.requests.delete')
+    def test_delete_sub_resource(self, requests_delete):
+        requests_delete.return_value = Mock(
+            status_code=200,
+            text=''
+        )
+
+        assert_true(API.remove_sub_resource('pies', 'wsGty', 'eaters', 'ws2123'))
+        requests_delete.assert_called_once_with(
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters/ws2123?apikey=api-key-123&source=app-name-123&format=json'
+        )
+
     @patch('litmos.api.requests.get')
     def test_get_sub_resource(self, requests_get):
         requests_get.return_value = Mock(
@@ -170,6 +182,7 @@ class TestLitmosAPI:
             'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
             json={'Id': '', 'Name': 'Charlie'}
         )
+
     @patch('litmos.api.requests.post')
     def test_add_sub_resource_list(self, requests_post):
         requests_post.return_value = Mock(

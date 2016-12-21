@@ -1,0 +1,30 @@
+interactions:
+- request:
+    body: '{"Id": "", "UserName": "jobaba7@pieshop.net", "FirstName": "Jo", "LastName":
+      "Baba7", "FullName": "", "Email": "jobaba7@pieshop.net", "AccessLevel": "Learner",
+      "DisableMessages": true, "Active": true, "Skype": "", "PhoneWork": "", "PhoneMobile":
+      "", "LastLogin": "", "LoginKey": "", "IsCustomUsername": false, "Password":
+      "", "SkipFirstLogin": true, "TimeZone": "UTC", "Street1": "", "Street2": "",
+      "City": "", "State": "", "PostalCode": "", "Country": "", "CompanyName": "",
+      "JobTitle": "", "CustomField1": "", "CustomField2": "", "CustomField4": "",
+      "CustomField5": "", "CustomField6": "", "CustomField7": "", "CustomField8":
+      "", "CustomField9": "", "CustomField10": "", "Culture": ""}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['687']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Detail":"UserName already exists"}'}
+    headers:
+      Content-Length: ['36']
+      Content-Type: [application/json]
+      Date: ['Wed, 21 Dec 2016 13:22:58 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 409, message: UserName already exists}
+version: 1

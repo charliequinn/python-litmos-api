@@ -1,0 +1,38 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&search=jobaba2@pieshop.net
+  response:
+    body: {string: '[{"Id":"A5WgbmCW_QY1","UserName":"jobaba2@pieshop.net","FirstName":"Jo","LastName":"Baba2","Active":true,"Email":"jobaba2@pieshop.net","AccessLevel":"Learner"}]'}
+    headers:
+      Content-Length: ['160']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 14:02:42 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.12.3]
+    method: DELETE
+    uri: https://api.litmos.com/v1.svc/users/A5WgbmCW_QY1/teams?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 14:02:43 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

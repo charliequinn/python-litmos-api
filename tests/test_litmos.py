@@ -172,6 +172,19 @@ class TestUser:
 
         api_mock.update.assert_called_once_with('users', 'wsGth', OrderedDict([('Id', 'wsGth'), ('UserName', ''), ('FirstName', ''), ('LastName', ''), ('FullName', ''), ('Email', ''), ('AccessLevel', 'Learner'), ('DisableMessages', True), ('Active', False), ('Skype', ''), ('PhoneWork', ''), ('PhoneMobile', ''), ('LastLogin', ''), ('LoginKey', ''), ('IsCustomUsername', False), ('Password', ''), ('SkipFirstLogin', True), ('TimeZone', 'UTC'), ('Street1', ''), ('Street2', ''), ('City', ''), ('State', ''), ('PostalCode', ''), ('Country', ''), ('CompanyName', ''), ('JobTitle', ''), ('CustomField1', ''), ('CustomField2', ''), ('CustomField4', ''), ('CustomField5', ''), ('CustomField6', ''), ('CustomField7', ''), ('CustomField8', ''), ('CustomField9', ''), ('CustomField10', ''), ('Culture', '')]))
 
+    @patch('litmos.litmos.API')
+    def test_remove_teams(self, api_mock):
+        api_mock.remove_sub_resource.return_value = True
+
+        user = User({'Id': 'fgUr2', 'Name': 'User1'})
+
+        assert_true(user.remove_teams())
+
+        api_mock.remove_sub_resource.assert_called_once_with('users',
+                                                             user.Id,
+                                                             'teams',
+                                                             None)
+
 
 class TestTeam:
     @patch('litmos.litmos.API')
@@ -203,6 +216,22 @@ class TestTeam:
         eq_('fgUr3', users[0].Id)
 
         api_mock.get_sub_resource.assert_called_once_with('teams', 'fgUr1', 'users')
+
+    @patch('litmos.litmos.API')
+    def test_leaders(self, api_mock):
+        api_mock.get_sub_resource.return_value = [
+            {'Id': 'fgUr3', 'Name': 'TeamLeader1'},
+        ]
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        users = team.leaders()
+
+        eq_(len(users), 1)
+        eq_('fgUr3', users[0].Id)
+        assert_true(isinstance(users[0], User))
+
+        api_mock.get_sub_resource.assert_called_once_with('teams', 'fgUr1', 'leaders')
 
     @patch('litmos.litmos.API')
     def test_add_sub_team(self, api_mock):
@@ -237,3 +266,51 @@ class TestTeam:
             [OrderedDict([('Id', 'wser4351'), ('UserName', 'paul.smith1'), ('FirstName', 'Paul1'), ('LastName', 'Smith1')]),
              OrderedDict([('Id', 'wser435'), ('UserName', 'paul.smith'), ('FirstName', 'Paul'), ('LastName', 'Smith')])]
         )
+
+    @patch('litmos.litmos.API')
+    def test_promote_leader(self, api_mock):
+        api_mock.update_sub_resource.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        user1 = User({'FirstName': 'Paul1', 'LastName': 'Smith1', 'UserName': 'paul.smith1', 'Id': 'wser4351'})
+
+        assert_true(team.promote_team_leader(user1))
+
+        api_mock.update_sub_resource.assert_called_once_with(
+            'teams',
+            team.Id,
+            'leaders',
+            user1.Id
+        )
+
+    @patch('litmos.litmos.API')
+    def test_demote_leader(self, api_mock):
+        api_mock.remove_sub_resource.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        user1 = User({'FirstName': 'Paul1', 'LastName': 'Smith1', 'UserName': 'paul.smith1', 'Id': 'wser4351'})
+
+        assert_true(team.demote_team_leader(user1))
+
+        api_mock.remove_sub_resource.assert_called_once_with(
+            'teams',
+            team.Id,
+            'leaders',
+            user1.Id
+        )
+
+    @patch('litmos.litmos.API')
+    def test_remove_user(self, api_mock):
+        api_mock.remove_sub_resource.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+        user = User({'Id': 'fgUr2', 'Name': 'User1'})
+
+        assert_true(team.remove_user(user))
+
+        api_mock.remove_sub_resource.assert_called_once_with('teams',
+                                                             team.Id,
+                                                             'users',
+                                                             user.Id)

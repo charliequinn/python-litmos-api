@@ -15,6 +15,7 @@ class API(object):
             resource + \
             ("/" + kwargs['resource_id'] if kwargs.get('resource_id', None) else "") + \
             ("/" + kwargs['sub_resource'] if kwargs.get('sub_resource', None) else "") + \
+            ("/" + kwargs['sub_resource_id'] if kwargs.get('sub_resource_id', None) else "") + \
             '?apikey=' + cls.api_key + \
             '&source=' + cls.app_name + \
             '&format=json' + \
@@ -36,7 +37,9 @@ class API(object):
     @classmethod
     def delete(cls, resource, resource_id):
         response = requests.delete(
-            cls._base_url(resource, resource_id=resource_id)
+            cls._base_url(resource,
+                          resource_id=resource_id
+                          )
         )
 
         return response.status_code == 200
@@ -141,3 +144,34 @@ class API(object):
             return True
         else:
             return json.loads(response.text)
+
+    @classmethod
+    def update_sub_resource(cls, resource, resource_id, sub_resource, sub_resource_id):
+        response = requests.put(
+            cls._base_url(
+                resource,
+                resource_id=resource_id,
+                sub_resource=sub_resource,
+                sub_resource_id=sub_resource_id
+            ),
+        )
+
+        if response.status_code is not 201:
+            return False
+        elif not response.text:
+            return True
+        else:
+            return json.loads(response.text)
+
+
+    @classmethod
+    def remove_sub_resource(cls, resource, resource_id, sub_resource, sub_resource_id):
+        response = requests.delete(
+            cls._base_url(resource,
+                          resource_id=resource_id,
+                          sub_resource=sub_resource,
+                          sub_resource_id=sub_resource_id)
+        )
+
+        return response.status_code == 200
+

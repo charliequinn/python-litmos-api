@@ -1,0 +1,87 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"JyLa085jwVs1","Name":"Max Chandler","Description":""}'}
+    headers:
+      Content-Length: ['61']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 13:21:35 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"Id": "", "UserName": "jobaba7@pieshop.net", "FirstName": "Jo", "LastName":
+      "Baba7", "FullName": "", "Email": "jobaba7@pieshop.net", "AccessLevel": "Learner",
+      "DisableMessages": true, "Active": true, "Skype": "", "PhoneWork": "", "PhoneMobile":
+      "", "LastLogin": "", "LoginKey": "", "IsCustomUsername": false, "Password":
+      "", "SkipFirstLogin": true, "TimeZone": "UTC", "Street1": "", "Street2": "",
+      "City": "", "State": "", "PostalCode": "", "Country": "", "CompanyName": "",
+      "JobTitle": "", "CustomField1": "", "CustomField2": "", "CustomField4": "",
+      "CustomField5": "", "CustomField6": "", "CustomField7": "", "CustomField8":
+      "", "CustomField9": "", "CustomField10": "", "Culture": ""}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['687']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"QuRkl5Xe6mc1","UserName":"jobaba7@pieshop.net","FirstName":"Jo","LastName":"Baba7","FullName":"Jo
+        Baba7","Email":"jobaba7@pieshop.net","AccessLevel":"Learner","DisableMessages":true,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"","LoginKey":"https:\/\/app-name\/\/login.aspx?loginkey=9cff1d4f-0d27-400d-b99c-f397d1ba5ec1","IsCustomUsername":false,"Password":"","SkipFirstLogin":false,"TimeZone":"UTC","SalesforceId":null,"OriginalId":5098462,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-21T13:21:36Z","Points":0}'}
+    headers:
+      Content-Length: ['901']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 13:21:35 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: '[{"Id": "QuRkl5Xe6mc1", "UserName": "jobaba7@pieshop.net", "FirstName":
+      "Jo", "LastName": "Baba7"}]'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['99']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 13:21:36 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.12.3]
+    method: DELETE
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1/users/QuRkl5Xe6mc1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 13:21:41 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

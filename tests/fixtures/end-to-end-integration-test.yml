@@ -1,0 +1,247 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&search=jobaba66@pieshop.net
+  response:
+    body: {string: '[{"Id":"6BI6f6Mblfw1","UserName":"jobaba66@pieshop.net","FirstName":"Jo","LastName":"Baba66","Active":true,"Email":"jobaba66@pieshop.net","AccessLevel":"Learner"}]'}
+    headers:
+      Content-Length: ['163']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 15:18:46 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"Id": "", "UserName": "jobaba72@pieshop.net", "FirstName": "Jo", "LastName":
+      "Baba72", "FullName": "", "Email": "jobaba72@pieshop.net", "AccessLevel": "Learner",
+      "DisableMessages": true, "Active": true, "Skype": "", "PhoneWork": "", "PhoneMobile":
+      "", "LastLogin": "", "LoginKey": "", "IsCustomUsername": false, "Password":
+      "", "SkipFirstLogin": true, "TimeZone": "UTC", "Street1": "", "Street2": "",
+      "City": "", "State": "", "PostalCode": "", "Country": "", "CompanyName": "",
+      "JobTitle": "", "CustomField1": "", "CustomField2": "", "CustomField4": "",
+      "CustomField5": "", "CustomField6": "", "CustomField7": "", "CustomField8":
+      "", "CustomField9": "", "CustomField10": "", "Culture": ""}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['690']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"bM3I1uYRkrk1","UserName":"jobaba72@pieshop.net","FirstName":"Jo","LastName":"Baba72","FullName":"Jo
+        Baba72","Email":"jobaba72@pieshop.net","AccessLevel":"Learner","DisableMessages":true,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"","LoginKey":"https:\/\/app-name12345\/\/login.aspx?loginkey=c945b4fa-1cb0-4354-bd13-91e792e2ca9f","IsCustomUsername":false,"Password":"","SkipFirstLogin":false,"TimeZone":"UTC","SalesforceId":null,"OriginalId":5098923,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-21T15:18:47Z","Points":0}'}
+    headers:
+      Content-Length: ['905']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 15:18:46 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: '{"Id": "", "Name": "jobaba66", "Description": "Jobaba''s B team"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['64']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"1QWxECnDIv81","Name":"jobaba66","Description":"Jobaba''s
+        B team"}'}
+    headers:
+      Content-Length: ['71']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 15:18:47 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: '{"Id": "", "Name": "jobaba33", "Description": "Jobaba''s C team"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['64']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams/1QWxECnDIv81/teams?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"FN4I84jQZmk1","Name":"jobaba33","Description":"Jobaba''s
+        C team"}'}
+    headers:
+      Content-Length: ['71']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 15:18:47 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: '{"Id": "", "Name": "jobaba001", "Description": "Jobaba''s D team"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['65']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams/FN4I84jQZmk1/teams?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"jgCNhMgihn41","Name":"jobaba001","Description":"Jobaba''s
+        D team"}'}
+    headers:
+      Content-Length: ['72']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 15:18:47 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: '{"Id": "", "Name": "jobaba002", "Description": "Jobaba''s E team"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['65']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams/FN4I84jQZmk1/teams?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"qq3mXRy1mqc1","Name":"jobaba002","Description":"Jobaba''s
+        E team"}'}
+    headers:
+      Content-Length: ['72']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 15:18:48 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: '[{"Id": "6BI6f6Mblfw1", "UserName": "jobaba66@pieshop.net", "FirstName":
+      "Jo", "LastName": "Baba66"}, {"Id": "bM3I1uYRkrk1", "UserName": "jobaba72@pieshop.net",
+      "FirstName": "Jo", "LastName": "Baba72"}]'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['202']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams/qq3mXRy1mqc1/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 15:18:49 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.12.3]
+    method: PUT
+    uri: https://api.litmos.com/v1.svc/teams/qq3mXRy1mqc1/leaders/6BI6f6Mblfw1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 15:18:49 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: '[{"Id": "bM3I1uYRkrk1", "UserName": "jobaba72@pieshop.net", "FirstName":
+      "Jo", "LastName": "Baba72"}, {"Id": "6BI6f6Mblfw1", "UserName": "jobaba66@pieshop.net",
+      "FirstName": "Jo", "LastName": "Baba66"}]'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['202']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: https://api.litmos.com/v1.svc/teams/jgCNhMgihn41/users?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 15:18:49 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 201, message: Created}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.12.3]
+    method: PUT
+    uri: https://api.litmos.com/v1.svc/teams/jgCNhMgihn41/leaders/6BI6f6Mblfw1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 15:18:50 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.12.3]
+    method: PUT
+    uri: https://api.litmos.com/v1.svc/teams/jgCNhMgihn41/leaders/bM3I1uYRkrk1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 15:18:50 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.12.3]
+    method: DELETE
+    uri: https://api.litmos.com/v1.svc/teams/jgCNhMgihn41/leaders/6BI6f6Mblfw1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Wed, 21 Dec 2016 15:18:51 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

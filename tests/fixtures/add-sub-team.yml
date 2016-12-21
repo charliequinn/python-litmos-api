@@ -9,7 +9,7 @@ interactions:
     method: GET
     uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?apikey=app-key12345&source=app-name12345&format=json
   response:
-    body: {string: '{"Id":"JyLa085jwVs1","Name":"Ruth Chandler","Description":""}'}
+    body: {string: '{"Id":"JyLa085jwVs1","Name":"Max Chandler","Description":""}'}
     headers:
       Content-Length: ['61']
       Content-Type: [application/json; charset=utf-8]
