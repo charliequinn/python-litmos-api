@@ -60,9 +60,9 @@ class LitmosType(object):
         return p.plural(cls.__name__.lower())
 
     @classmethod
-    def find(cls, id):
+    def find(cls, resource_id):
         return cls._parse_response(
-            API.find(cls.name(), id)
+            API.find(cls.name(), resource_id)
         )
 
     @classmethod
@@ -116,7 +116,7 @@ class Team(LitmosType):
     ])
 
     def sub_teams(self):
-        return self.__class__._parse_response(
+        return self._parse_response(
             API.get_sub_resource(
                 self.__class__.name(),
                 self.Id,
@@ -149,7 +149,7 @@ class Team(LitmosType):
             if attribute_value is not None:
                 schema[param] = attribute_value
 
-        sub_team = self.__class__._parse_response(
+        sub_team = self._parse_response(
             API.add_sub_resource(
                 self.__class__.name(),
                 self.Id,
