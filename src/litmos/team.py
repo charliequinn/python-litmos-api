@@ -106,3 +106,7 @@ class Team(LitmosType):
             'leaders',
             user.Id
         )
+
+    @classmethod
+    def hierarchy_tree(cls):
+        pass
