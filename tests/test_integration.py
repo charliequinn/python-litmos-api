@@ -1,7 +1,9 @@
 import vcr
 from nose.tools import eq_, assert_true, assert_false
 
-from litmos.litmos import Litmos, User, Team
+from litmos import Litmos
+from litmos.team import Team
+from litmos.user import User
 
 
 class TestLitmosIntegration:
