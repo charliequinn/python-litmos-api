@@ -82,7 +82,11 @@ class TestLitmosType:
 
         lm.save()
 
-        api_mock.update.assert_called_once_with('litmostypes', 'wsGty', OrderedDict([('Id', 'wsGty'), ('Name', 'James')]))
+        api_mock.update.assert_called_once_with(
+            'litmostypes',
+            'wsGty',
+            OrderedDict([('Id', 'wsGty'), ('Name', 'James')])
+        )
         assert_true(isinstance(lm, LitmosType))
         eq_(lm.Id, 'wsGty')
         eq_(lm.Name, 'James')
@@ -170,7 +174,48 @@ class TestUser:
 
         assert_true(user.deactivate())
 
-        api_mock.update.assert_called_once_with('users', 'wsGth', OrderedDict([('Id', 'wsGth'), ('UserName', ''), ('FirstName', ''), ('LastName', ''), ('FullName', ''), ('Email', ''), ('AccessLevel', 'Learner'), ('DisableMessages', True), ('Active', False), ('Skype', ''), ('PhoneWork', ''), ('PhoneMobile', ''), ('LastLogin', ''), ('LoginKey', ''), ('IsCustomUsername', False), ('Password', ''), ('SkipFirstLogin', True), ('TimeZone', 'UTC'), ('Street1', ''), ('Street2', ''), ('City', ''), ('State', ''), ('PostalCode', ''), ('Country', ''), ('CompanyName', ''), ('JobTitle', ''), ('CustomField1', ''), ('CustomField2', ''), ('CustomField4', ''), ('CustomField5', ''), ('CustomField6', ''), ('CustomField7', ''), ('CustomField8', ''), ('CustomField9', ''), ('CustomField10', ''), ('Culture', '')]))
+        api_mock.update.assert_called_once_with(
+            'users',
+            'wsGth',
+            OrderedDict([('Id', 'wsGth'),
+                         ('UserName', ''),
+                         ('FirstName', ''),
+                         ('LastName', ''),
+                         ('FullName', ''),
+                         ('Email', ''),
+                         ('AccessLevel', 'Learner'),
+                         ('DisableMessages', True),
+                         ('Active', False),
+                         ('Skype', ''),
+                         ('PhoneWork', ''),
+                         ('PhoneMobile', ''),
+                         ('LastLogin', ''),
+                         ('LoginKey', ''),
+                         ('IsCustomUsername', False),
+                         ('Password', ''),
+                         ('SkipFirstLogin', True),
+                         ('TimeZone', 'UTC'),
+                         ('Street1', ''),
+                         ('Street2', ''),
+                         ('City', ''),
+                         ('State', ''),
+                         ('PostalCode', ''),
+                         ('Country', ''),
+                         ('CompanyName', ''),
+                         ('JobTitle', ''),
+                         ('CustomField1', ''),
+                         ('CustomField2', ''),
+                         ('CustomField4', ''),
+                         ('CustomField5', ''),
+                         ('CustomField6', ''),
+                         ('CustomField7', ''),
+                         ('CustomField8', ''),
+                         ('CustomField9', ''),
+                         ('CustomField10', ''),
+                         ('Culture', '')
+                         ]
+                        )
+        )
 
     @patch('litmos.litmos.API')
     def test_remove_teams(self, api_mock):
@@ -246,7 +291,15 @@ class TestTeam:
         new_sub_team_id = team.add_sub_team(sub_team)
 
         eq_(new_sub_team_id, 'wsd456Yh')
-        api_mock.add_sub_resource.assert_called_once_with('teams', 'fgUr1', 'teams', OrderedDict([('Id', ''), ('Name', 'SubTeam1'), ('Description', '')]))
+        api_mock.add_sub_resource.assert_called_once_with(
+            'teams',
+            'fgUr1',
+            'teams',
+            OrderedDict([('Id', ''),
+                         ('Name', 'SubTeam1'),
+                         ('Description', '')]
+                        )
+        )
 
     @patch('litmos.litmos.API')
     def test_add_users(self, api_mock):
@@ -263,8 +316,16 @@ class TestTeam:
             'teams',
             'fgUr1',
             'users',
-            [OrderedDict([('Id', 'wser4351'), ('UserName', 'paul.smith1'), ('FirstName', 'Paul1'), ('LastName', 'Smith1')]),
-             OrderedDict([('Id', 'wser435'), ('UserName', 'paul.smith'), ('FirstName', 'Paul'), ('LastName', 'Smith')])]
+            [
+                OrderedDict([('Id', 'wser4351'),
+                          ('UserName', 'paul.smith1'),
+                          ('FirstName', 'Paul1'),
+                          ('LastName', 'Smith1')]),
+                OrderedDict([('Id', 'wser435'),
+                          ('UserName', 'paul.smith'),
+                          ('FirstName', 'Paul'),
+                          ('LastName', 'Smith')])
+            ]
         )
 
     @patch('litmos.litmos.API')
@@ -310,7 +371,11 @@ class TestTeam:
 
         assert_true(team.remove_user(user))
 
-        api_mock.remove_sub_resource.assert_called_once_with('teams',
-                                                             team.Id,
-                                                             'users',
-                                                             user.Id)
+        api_mock.remove_sub_resource.assert_called_once_with(
+            'teams',
+            team.Id,
+            'users',user.Id
+        )
+
+    def test_team_hierarchy(self):
+        pass

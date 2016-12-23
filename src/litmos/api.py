@@ -24,68 +24,68 @@ class API(object):
             ("&start=" + str(kwargs['start']) if kwargs.get('start', None) else "")
 
     @classmethod
+    def _perform_request(cls, method, url, **kwargs):
+        response = requests.request(method, url, **kwargs)
+        response.raise_for_status()
+
+        return response
+
+    @classmethod
     def find(cls, resource, resource_id):
-        response = requests.get(
+        response = cls._perform_request(
+            'GET',
             cls._base_url(resource, resource_id=resource_id)
         )
-
-        if response.status_code == 404:
-            return None
 
         return json.loads(response.text)
 
     @classmethod
     def delete(cls, resource, resource_id):
-        response = requests.delete(
+        cls._perform_request(
+            'DELETE',
             cls._base_url(resource,
                           resource_id=resource_id
                           )
         )
 
-        return response.status_code == 200
+        return True
 
     @classmethod
     def create(cls, resource, attributes):
-        response = requests.post(
+        response = cls._perform_request(
+            'POST',
             cls._base_url(resource),
             json=attributes
         )
-
-        if response.status_code == 404:
-            return None
 
         return json.loads(response.text)
 
     @classmethod
     def update(cls, resource, resource_id, attributes):
-        response = requests.put(
+        response = cls._perform_request(
+            'PUT',
             cls._base_url(resource, resource_id=resource_id),
             json=attributes
         )
 
-        if response.status_code == 404:
-            return None
-
         if response.text:
             return json.loads(response.text)
-        else:
-            return {}
 
+        return {}
 
     @classmethod
     def search(cls, resource, search_param):
-        response = requests.get(
+        response = cls._perform_request(
+            'GET',
             cls._base_url(resource, search_param=search_param)
         )
-
-        if response.status_code == 404:
-            return None
 
         return json.loads(response.text)
 
     @classmethod
     def _get_all(cls, resource, results, start_pos):
-        response = requests.get(
+        response = cls._perform_request(
+            'GET',
             cls._base_url(resource, limit=cls.PAGINATION_OFFSET, start=start_pos)
         )
 
@@ -103,18 +103,17 @@ class API(object):
 
     @classmethod
     def get_children(cls, resource, resource_id):
-        response = requests.get(
+        response = cls._perform_request(
+            'GET',
             cls._base_url(resource, resource_id=resource_id, sub_resource=resource)
         )
-
-        if response.status_code == 404:
-            return None
 
         return json.loads(response.text)
 
     @classmethod
     def get_sub_resource(cls, resource, resource_id, sub_resource):
-        response = requests.get(
+        response = cls._perform_request(
+            'GET',
             cls._base_url(
                 resource,
                 resource_id=resource_id,
@@ -122,14 +121,12 @@ class API(object):
             )
         )
 
-        if response.status_code == 404:
-            return None
-
         return json.loads(response.text)
 
     @classmethod
     def add_sub_resource(cls, resource, resource_id, sub_resource, attributes):
-        response = requests.post(
+        response = cls._perform_request(
+            'POST',
             cls._base_url(
                 resource,
                 resource_id=resource_id,
@@ -138,16 +135,15 @@ class API(object):
             json=attributes
         )
 
-        if response.status_code is not 201:
-            return False
-        elif not response.text:
-            return True
-        else:
+        if response.text:
             return json.loads(response.text)
+
+        return True
 
     @classmethod
     def update_sub_resource(cls, resource, resource_id, sub_resource, sub_resource_id):
-        response = requests.put(
+        response = cls._perform_request(
+            'PUT',
             cls._base_url(
                 resource,
                 resource_id=resource_id,
@@ -156,22 +152,19 @@ class API(object):
             ),
         )
 
-        if response.status_code is not 201:
-            return False
-        elif not response.text:
-            return True
-        else:
+        if response.text:
             return json.loads(response.text)
 
+        return True
 
     @classmethod
     def remove_sub_resource(cls, resource, resource_id, sub_resource, sub_resource_id):
-        response = requests.delete(
+        cls._perform_request(
+            'DELETE',
             cls._base_url(resource,
                           resource_id=resource_id,
                           sub_resource=sub_resource,
                           sub_resource_id=sub_resource_id)
         )
 
-        return response.status_code == 200
-
+        return True
