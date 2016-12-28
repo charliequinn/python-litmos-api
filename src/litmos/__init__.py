@@ -5,7 +5,7 @@ from litmos.litmos import LitmosType
 from litmos.team import Team
 from litmos.user import User
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 class Litmos(object):
