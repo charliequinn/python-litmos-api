@@ -1,4 +1,5 @@
 import json
+import time
 
 import requests
 
@@ -26,6 +27,11 @@ class API(object):
     @classmethod
     def _perform_request(cls, method, url, **kwargs):
         response = requests.request(method, url, **kwargs)
+
+        if response.status_code == 503:  # request rate limit exceeded
+            time.sleep(60)
+            response = requests.request(method, url, **kwargs)
+
         response.raise_for_status()
 
         return response
