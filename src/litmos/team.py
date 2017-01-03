@@ -79,7 +79,7 @@ class Team(LitmosType):
         return API.add_sub_resource(
             self.__class__.name(),
             self.Id,
-            user.__class__.name(),
+            User.name(),
             user_list
         )
 
