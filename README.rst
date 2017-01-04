@@ -66,6 +66,17 @@ Installation
 
     pip install litmos-api
 
+
+Getting started
+=============
+
+::
+    from litmos import Litmos 
+    litmos = Litmos({apikey}, {source})
+    
+    #retrieve users
+    all_users = litmos.User.all()
+    
 Documentation
 =============
 
