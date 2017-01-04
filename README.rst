@@ -120,6 +120,12 @@ Getting started
     # find team by Id
     team = litmos.Team.find('rnjx2WaQOa11')
     
+    # get team members
+    users = team.users()
+    
+    # get team leaders
+    leaders = team.leaders()
+    
     # create team (at root level)
     team = litmos.Team.create({'Name': 'A-Team','Description': 'I pity the fool!'})
     
