@@ -1,3 +1,4 @@
+import html
 import json
 import time
 
@@ -24,8 +25,8 @@ class API(object):
             ("&limit=" + str(kwargs['limit']) if kwargs.get('limit', None) else "") + \
             ("&start=" + str(kwargs['start']) if kwargs.get('start', None) else "")
 
-    @classmethod
-    def _perform_request(cls, method, url, **kwargs):
+    @staticmethod
+    def _perform_request(method, url, **kwargs):
         response = requests.request(method, url, **kwargs)
 
         if response.status_code == 503:  # request rate limit exceeded
@@ -36,6 +37,10 @@ class API(object):
 
         return response
 
+    @staticmethod
+    def _parse_response(response):
+        return json.loads(html.unescape(response.text))
+
     @classmethod
     def find(cls, resource, resource_id):
         response = cls._perform_request(
@@ -43,7 +48,7 @@ class API(object):
             cls._base_url(resource, resource_id=resource_id)
         )
 
-        return json.loads(response.text)
+        return cls._parse_response(response)
 
     @classmethod
     def delete(cls, resource, resource_id):
@@ -64,7 +69,7 @@ class API(object):
             json=attributes
         )
 
-        return json.loads(response.text)
+        return cls._parse_response(response)
 
     @classmethod
     def update(cls, resource, resource_id, attributes):
@@ -75,7 +80,7 @@ class API(object):
         )
 
         if response.text:
-            return json.loads(response.text)
+            return cls._parse_response(response)
 
         return {}
 
@@ -86,7 +91,7 @@ class API(object):
             cls._base_url(resource, search_param=search_param)
         )
 
-        return json.loads(response.text)
+        return cls._parse_response(response)
 
     @classmethod
     def _get_all(cls, resource, results, start_pos):
@@ -95,7 +100,7 @@ class API(object):
             cls._base_url(resource, limit=cls.PAGINATION_OFFSET, start=start_pos)
         )
 
-        response_list = json.loads(response.text)
+        response_list = cls._parse_response(response)
         results += response_list
 
         if not response_list:
@@ -114,7 +119,7 @@ class API(object):
             cls._base_url(resource, resource_id=resource_id, sub_resource=resource)
         )
 
-        return json.loads(response.text)
+        return cls._parse_response(response)
 
     @classmethod
     def get_sub_resource(cls, resource, resource_id, sub_resource):
@@ -127,7 +132,7 @@ class API(object):
             )
         )
 
-        return json.loads(response.text)
+        return cls._parse_response(response)
 
     @classmethod
     def add_sub_resource(cls, resource, resource_id, sub_resource, attributes):
@@ -142,7 +147,7 @@ class API(object):
         )
 
         if response.text:
-            return json.loads(response.text)
+            return cls._parse_response(response)
 
         return True
 
@@ -159,7 +164,7 @@ class API(object):
         )
 
         if response.text:
-            return json.loads(response.text)
+            return cls._parse_response(response)
 
         return True
 

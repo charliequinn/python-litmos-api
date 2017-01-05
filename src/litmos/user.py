@@ -13,7 +13,7 @@ class User(LitmosType):
         ('FullName', ''),
         ('Email', ''),
         ('AccessLevel', 'Learner'),
-        ('DisableMessages', True),
+        ('DisableMessages', False),
         ('Active', True),
         ('Skype', ''),
         ('PhoneWork', ''),

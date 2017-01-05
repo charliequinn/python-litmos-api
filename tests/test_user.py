@@ -25,7 +25,7 @@ class TestUser:
                          ('FullName', ''),
                          ('Email', ''),
                          ('AccessLevel', 'Learner'),
-                         ('DisableMessages', True),
+                         ('DisableMessages', False),
                          ('Active', False),
                          ('Skype', ''),
                          ('PhoneWork', ''),
