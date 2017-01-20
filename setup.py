@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='litmos-api',
-    version='0.1.4',
+    version='0.2.0',
     license='BSD',
     description='Python package integrating with Litmos User and Teams API',
     long_description='%s\n%s' % (
