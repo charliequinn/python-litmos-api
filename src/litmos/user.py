@@ -55,3 +55,12 @@ class User(LitmosType):
             'teams',
             None
         )
+
+    @classmethod
+    def all(cls, full_details=False):
+        users = super().all()
+
+        if not full_details:
+            return users
+
+        return [cls.find(user.Id) for user in users]

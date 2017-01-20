@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from unittest.mock import patch
 
-from nose.tools import assert_true
+from nose.tools import assert_true, eq_
 
 from litmos import User
 
@@ -70,3 +70,26 @@ class TestUser:
                                                              user.Id,
                                                              'teams',
                                                              None)
+
+    @patch('litmos.litmos.API')
+    def test_all_full_details(self, api_mock):
+        api_mock.all.return_value = [
+            {"Id": 'ws5tghd', "Name": "Paul"},
+            {"Id": 'ws5tghe', "Name": "James"},
+        ]
+
+        api_mock.find.side_effect = [
+            {"Id": 'ws5tghd', "Name": "Paul", "CustomField1": "148"},
+            {"Id": 'ws5tghe', "Name": "James", "CustomField1": "145"},
+        ]
+
+        result = User.all(True)
+
+        eq_(len(result), 2)
+        eq_(result[0].Id, 'ws5tghd')
+        eq_(result[1].Id, 'ws5tghe')
+        eq_(result[0].CustomField1, '148')
+        eq_(result[1].CustomField1, '145')
+
+        assert_true(api_mock.all.called)
+        eq_(api_mock.find.call_count, 2)

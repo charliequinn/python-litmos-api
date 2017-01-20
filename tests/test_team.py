@@ -151,6 +151,3 @@ class TestTeam:
             team.Id,
             'users',user.Id
         )
-
-    def test_hierarchy_tree(self):
-        eq_(Team.hierarchy_tree(), None)
