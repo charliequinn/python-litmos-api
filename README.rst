@@ -62,6 +62,10 @@ Getting started
     # retrieve users
     all_users = litmos.User.all()
 
+    # retrieve all users (with all information populated - default /users/all API endpoint only returns a subset of user fields)
+    # much longer than .all() as individual requests to /find/{user-id} for every user are made
+    all_users_with_full_details = litmos.User.all(True)
+
     #find user by Id
     user = litmos.User.find('rnjx2WaQOa11')
 
