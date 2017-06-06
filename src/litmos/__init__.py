@@ -4,12 +4,14 @@ from litmos.api import API
 from litmos.litmos import LitmosType
 from litmos.team import Team
 from litmos.user import User
+from litmos.course import Course
+from litmos.course_module import CourseModule
 
 __version__ = "0.3.0"
 
 
 class Litmos(object):
-    ACCEPTABLE_TYPES = ['User', 'Team']
+    ACCEPTABLE_TYPES = ['User', 'Team', 'Course', 'CourseModule']
 
     def __init__(self, api_key, app_name):
         API.api_key = api_key

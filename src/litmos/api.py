@@ -84,6 +84,7 @@ class API(object):
 
         return {}
 
+
     @classmethod
     def search(cls, resource, search_param):
         response = cls._perform_request(
@@ -152,7 +153,7 @@ class API(object):
         return True
 
     @classmethod
-    def update_sub_resource(cls, resource, resource_id, sub_resource, sub_resource_id):
+    def update_sub_resource(cls, resource, resource_id, sub_resource, sub_resource_id, attributes=None):
         response = cls._perform_request(
             'PUT',
             cls._base_url(
@@ -161,6 +162,7 @@ class API(object):
                 sub_resource=sub_resource,
                 sub_resource_id=sub_resource_id
             ),
+            json=attributes
         )
 
         if response.text:

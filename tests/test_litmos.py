@@ -6,7 +6,7 @@ from litmos.api import API
 
 class TestLitmos:
     def test_acceptable_types(self):
-        eq_(Litmos.ACCEPTABLE_TYPES, ['User', 'Team'])
+        eq_(Litmos.ACCEPTABLE_TYPES, ['User', 'Team', 'Course', 'CourseModule'])
 
     def test_init(self):
         litmos = Litmos('app-key-123456', 'app-name-123456')

@@ -1,0 +1,87 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/courses/HvO-gG4n_BI1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"HvO-gG4n_BI1","Code":"WBT001","Name":"Why bother testing?","Active":true,"ForSale":false,"OriginalId":579253,"Description":"Testing
+        course","EcommerceShortDescription":"","EcommerceLongDescription":"","CourseCodeForBulkImport":"579253-WBT001","Price":0.00,"AccessTillDate":null,"AccessTillDays":null}'}
+    headers:
+      Content-Length: ['307']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 06 Jun 2017 14:00:14 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/courses/HvO-gG4n_BI1/modules?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '[{"Id":"-Lr_Nmvk8fo1","Code":"","Name":"TEST","Description":""},{"Id":"hK4oCBAod5M1","Code":"","Name":"TEST1","Description":""},{"Id":"EGXsBUoDOYk1","Code":"","Name":"TEST2","Description":""}]'}
+    headers:
+      Content-Length: ['192']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 06 Jun 2017 14:00:15 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users/CCzIpPA8OWo1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"CCzIpPA8OWo1","UserName":"charlie.quinn@skyscanner.net","FirstName":"Charlie","LastName":"Quinn","FullName":"Charlie
+        Quinn","Email":"charlie.quinn@skyscanner.net","AccessLevel":"Account_Owner","DisableMessages":false,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"2017-06-06T13:21:16Z","LoginKey":"https:\/\/app-name12345\/login.aspx?loginkey=1b8f4280-d640-4223-832b-830b4c1b0d75","IsCustomUsername":false,"Password":"","SkipFirstLogin":true,"TimeZone":"GMT
+        Standard Time","SalesforceId":null,"OriginalId":4974169,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"1378","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-05T17:39:15Z","Points":0,"Brand":"Default"}'}
+    headers:
+      Content-Length: ['992']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 06 Jun 2017 14:00:16 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"Note": "", "UserId": "CCzIpPA8OWo1", "Completed": true, "CourseId": "HvO-gG4n_BI1",
+      "Score": 100, "UpdatedAt": "2017-06-05T15:00:17Z"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['136']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: PUT
+    uri: https://api.litmos.com/v1.svc/results/modules/EGXsBUoDOYk1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '<html version="-//W3C//DTD XHTML 2.0//EN" xml:lang="en" xsi:schemaLocation="http://www.w3.org/1999/xhtml
+        http://www.w3.org/MarkUp/SCHEMA/xhtml2.xsd" xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><HEAD><TITLE>Request
+        Error</TITLE></HEAD><BODY><DIV id="content"><P class="heading1"><B>Error Status
+        Code:</B> ''InternalServerError''</P><P><B>Details: </B>The server encountered
+        an error processing the request. Please see the server logs for more details.</P><!--
+        Padding xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--></DIV></BODY></html>'}
+    headers:
+      Content-Length: ['1047']
+      Content-Type: [text/html]
+      Date: ['Tue, 06 Jun 2017 14:00:16 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 500, message: The server encountered an error processing the request.
+        Please see the server logs for more details.}
+version: 1

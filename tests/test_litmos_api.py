@@ -84,6 +84,20 @@ class TestLitmosAPI:
         )
 
     @patch('litmos.api.requests.request')
+    def test_update_sub_resource(self, request):
+        request.return_value = Mock(
+            status_code=200,
+            text='[]'
+        )
+
+        eq_(API.update_sub_resource('pies', None, 'chips', 'five', {'Name': 'Cheese & Onion'}), [])
+        request.assert_called_once_with(
+            'PUT',
+            'https://api.litmos.com/v1.svc/pies/chips/five?apikey=api-key-123&source=app-name-123&format=json',
+            json={'Name': 'Cheese & Onion'}
+        )
+
+    @patch('litmos.api.requests.request')
     def test_search(self, request):
         request.return_value = Mock(
             status_code=200,

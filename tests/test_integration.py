@@ -1,4 +1,5 @@
 import vcr
+from datetime import datetime, timedelta
 from nose.tools import eq_, assert_true, assert_false
 
 from litmos import Litmos
@@ -255,3 +256,21 @@ class TestLitmosIntegration:
 
         team.promote_team_leader(team_member1)
         assert_true(team.demote_team_leader(team_member1))
+
+    @vcr.use_cassette('fixtures/module_complete.yml')
+    def test_course_module_complete(self):
+        course = self.lms.Course.find('HvO-gG4n_BI1')
+
+        modules = course.modules()
+
+        team_member1 = self.lms.User.find('CCzIpPA8OWo1')
+
+        attributes = {
+            'UserId': team_member1.Id,
+            'Score': 100,
+            'Completed': True,
+            'UpdatedAt': (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'Note': ''
+        }
+
+        assert_true(course.module_complete(modules[2].Id, attributes))
