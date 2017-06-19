@@ -1,0 +1,78 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"RuzXNaD42Sw1","Code":"TST001","Name":"Test Why bother","Active":true,"ForSale":false,"OriginalId":590874,"Description":"","EcommerceShortDescription":"","EcommerceLongDescription":"","CourseCodeForBulkImport":"590874-TST001","Price":0.00,"AccessTillDate":null,"AccessTillDays":null}'}
+    headers:
+      Content-Length: ['289']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Mon, 19 Jun 2017 16:01:45 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1/modules?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '[{"Id":"0jnDHEIbXQo1","Code":"","Name":"Test","Description":""}]'}
+    headers:
+      Content-Length: ['64']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Mon, 19 Jun 2017 16:01:46 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/users/CCzIpPA8OWo1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: '{"Id":"CCzIpPA8OWo1","UserName":"charlie.quinn@pieshop.net","FirstName":"Charlie","LastName":"Quinn","FullName":"Charlie
+        Quinn","Email":"charlie.quinn@pieshop.net","AccessLevel":"Account_Owner","DisableMessages":false,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"2017-06-19T15:48:28Z","LoginKey":"https:\/\/skyscanneruniversity.litmos.com\/login.aspx?loginkey=ff0310fc-b441-46fa-a290-4b631baaf534","IsCustomUsername":false,"Password":"","SkipFirstLogin":true,"TimeZone":"GMT
+        Standard Time","SalesforceId":null,"OriginalId":4974169,"Street1":"","Street2":"","City":"","State":"","PostalCode":"","Country":"","CompanyName":"","JobTitle":"","CustomField1":"1378","CustomField2":"","CustomField3":"","Culture":"en-US","CustomField4":"","CustomField5":"","CustomField6":"","CustomField7":"","CustomField8":"","CustomField9":"","CustomField10":"","SalesforceContactId":null,"SalesforceAccountId":null,"CreatedDate":"2016-12-05T17:39:15Z","Points":0,"Brand":"Default"}'}
+    headers:
+      Content-Length: ['992']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Mon, 19 Jun 2017 16:01:46 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"UpdatedAt": "/Date(1497801750508)/", "CourseId": "RuzXNaD42Sw1", "UserId":
+      "CCzIpPA8OWo1", "Note": "", "Completed": true, "Score": 100}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['137']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.12.3]
+    method: PUT
+    uri: https://api.litmos.com/v1.svc/results/modules/0jnDHEIbXQo1?apikey=app-key12345&source=app-name12345&format=json
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+      Date: ['Mon, 19 Jun 2017 16:01:47 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

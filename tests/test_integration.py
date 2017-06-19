@@ -257,9 +257,9 @@ class TestLitmosIntegration:
         team.promote_team_leader(team_member1)
         assert_true(team.demote_team_leader(team_member1))
 
-    @vcr.use_cassette('fixtures/module_complete.yml')
+    @vcr.use_cassette('fixtures/mark-module-complete.yml')
     def test_course_module_complete(self):
-        course = self.lms.Course.find('HvO-gG4n_BI1')
+        course = self.lms.Course.find('RuzXNaD42Sw1')
 
         modules = course.modules()
 
@@ -269,8 +269,8 @@ class TestLitmosIntegration:
             'UserId': team_member1.Id,
             'Score': 100,
             'Completed': True,
-            'UpdatedAt': (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'UpdatedAt': (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
             'Note': ''
         }
 
-        assert_true(course.module_complete(modules[2].Id, attributes))
+        assert_true(course.module_complete(modules[0].Id, attributes))

@@ -1,3 +1,4 @@
+import datetime
 from collections import OrderedDict
 
 from litmos.litmos import LitmosType
@@ -33,6 +34,14 @@ class Course(LitmosType):
 
     def module_complete(self, module_id, attributes):
         attributes['CourseId'] = self.Id
+
+        iso_8601_date = attributes['UpdatedAt']
+
+        updated_at_datetime = datetime.datetime.strptime(iso_8601_date, '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        epoch_datetime = int(updated_at_datetime.timestamp() * 1000)
+
+        attributes['UpdatedAt'] = "/Date({0})/".format(epoch_datetime)
 
         return API.update_sub_resource(
             'results',

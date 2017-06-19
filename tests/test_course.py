@@ -25,7 +25,7 @@ class TestCourse:
         api_mock.update_sub_resource.return_value = True
         course = Course({'Id': 'fgUr1', 'Name': 'Team1'})
 
-        module_complete = course.module_complete('fg2', {})
+        module_complete = course.module_complete('fg2', {'UpdatedAt': '2016-11-10T13:50:11.390Z'})
 
         eq_(True, module_complete)
         api_mock.update_sub_resource.assert_called_once_with(
@@ -33,5 +33,5 @@ class TestCourse:
             None,
             'modules',
             'fg2',
-            {'CourseId': course.Id}
+            {'CourseId': course.Id, 'UpdatedAt': '/Date(1478785811390)/'}
         )
