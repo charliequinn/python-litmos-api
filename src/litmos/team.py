@@ -127,7 +127,7 @@ class Team(LitmosType):
         return API.add_sub_resource(
             self.__class__.name(),
             self.Id,
-            "courses",
+            'courses',
             course_list
         )
 
@@ -145,7 +145,7 @@ class Team(LitmosType):
         return API.remove_sub_resources(
             self.__class__.name(),
             self.Id,
-            "courses",
+            'courses',
             course_list
         )
 

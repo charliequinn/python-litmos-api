@@ -33,5 +33,5 @@ class TestCourse:
             None,
             'modules',
             'fg2',
-            {'CourseId': course.Id, 'UpdatedAt': '/Date(1478785811390)/'}
+            {'CourseId': course.Id, 'UpdatedAt': '/Date(1478782211390)/'}
         )

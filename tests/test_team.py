@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from nose.tools import eq_, assert_true
 
-from litmos import Team, User
+from litmos import Team, User, Course
 
 
 class TestTeam:
@@ -151,3 +151,43 @@ class TestTeam:
             team.Id,
             'users',user.Id
         )
+
+    @patch('litmos.team.API')
+    def test_assign_courses(self, api_mock):
+        api_mock.add_sub_resource.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        courses = [Course({'Id': '1234567890', 'CourseTeamLibrary': ''})]
+
+        assert_true(team.assign_courses(courses))
+
+        api_mock.add_sub_resource.assert_called_once_with(
+            'teams',
+            'fgUr1',
+            'courses',
+            [OrderedDict([('Id', '1234567890'),
+                         ('CourseTeamLibrary', '')]
+                        )]
+        )
+
+    @patch('litmos.team.API')
+    def test_unassign_courses(self, api_mock):
+        api_mock.remove_sub_resources.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        courses = [Course({'Id': '1234567890', 'CourseTeamLibrary': ''})]
+
+        assert_true(team.unassign_courses(courses))
+
+        api_mock.remove_sub_resources.assert_called_once_with(
+            'teams',
+            'fgUr1',
+            'courses',
+            [OrderedDict([('Id', '1234567890'),
+                          ('CourseTeamLibrary', '')]
+                         )]
+        )
+
+
