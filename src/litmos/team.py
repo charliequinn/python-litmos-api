@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from copy import copy
 
+from litmos.course import Course
 from litmos.litmos import LitmosType
 from litmos.api import API
 from litmos.user import User
@@ -18,6 +19,11 @@ class Team(LitmosType):
         ('UserName', ''),
         ('FirstName', ''),
         ('LastName', '')
+    ])
+
+    COURSE_SCHEMA = OrderedDict([
+        ('Id', ''),
+        ('CourseTeamLibrary', '')
     ])
 
     def sub_teams(self):
@@ -106,3 +112,42 @@ class Team(LitmosType):
             'leaders',
             user.Id
         )
+
+    def assign_courses(self, courses):
+        course_list = []
+        for course in courses:
+            schema = copy(self.COURSE_SCHEMA)
+            for param in schema:
+                attribute_value = getattr(course, param)
+                if attribute_value is not None:
+                    schema[param] = attribute_value
+
+            course_list.append(schema)
+
+        return API.add_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            "courses",
+            course_list
+        )
+
+    def unassign_courses(self, courses):
+        course_list = []
+        for course in courses:
+            schema = copy(self.COURSE_SCHEMA)
+            for param in schema:
+                attribute_value = getattr(course, param)
+                if attribute_value is not None:
+                    schema[param] = attribute_value
+
+            course_list.append(schema)
+
+        return API.remove_sub_resources(
+            self.__class__.name(),
+            self.Id,
+            "courses",
+            course_list
+        )
+
+
+
