@@ -158,17 +158,21 @@ class TestTeam:
 
         team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
 
-        courses = [Course({'Id': '1234567890', 'CourseTeamLibrary': ''})]
+        course1 = Course({'Id': '1234567890', 'CourseTeamLibrary': ''})
+        course2 = Course({'Id': '1234567899', 'CourseTeamLibrary': ''})
 
-        assert_true(team.assign_courses(courses))
+        assert_true(team.assign_courses([course1, course2]))
 
         api_mock.add_sub_resource.assert_called_once_with(
             'teams',
             'fgUr1',
             'courses',
-            [OrderedDict([('Id', '1234567890'),
-                         ('CourseTeamLibrary', '')]
-                        )]
+            [
+                OrderedDict([('Id', '1234567890'),
+                         ('CourseTeamLibrary', '')]),
+                OrderedDict([('Id', '1234567899'),
+                         ('CourseTeamLibrary', '')])
+            ]
         )
 
     @patch('litmos.team.API')
@@ -177,17 +181,21 @@ class TestTeam:
 
         team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
 
-        courses = [Course({'Id': '1234567890', 'CourseTeamLibrary': ''})]
+        course1 = Course({'Id': '1234567890', 'CourseTeamLibrary': ''})
+        course2 = Course({'Id': '1234567899', 'CourseTeamLibrary': ''})
 
-        assert_true(team.unassign_courses(courses))
+        assert_true(team.unassign_courses([course1, course2]))
 
         api_mock.remove_sub_resources.assert_called_once_with(
             'teams',
             'fgUr1',
             'courses',
-            [OrderedDict([('Id', '1234567890'),
-                          ('CourseTeamLibrary', '')]
-                         )]
+            [
+                OrderedDict([('Id', '1234567890'),
+                             ('CourseTeamLibrary', '')]),
+                OrderedDict([('Id', '1234567899'),
+                             ('CourseTeamLibrary', '')])
+            ]
         )
 
 

@@ -123,6 +123,16 @@ Getting started
 
     sub_team_id = team.add_sub_team(sub_team)
 
+    # assign courses to team
+    course1 = litmos.Course.find('d2cJSDvIU0c1')
+    course2 = litmos.Course.find('d2cJSDvIU0c2')
+    team.assign_courses([course1, course2])
+
+    # unassign courses to team
+    course1 = litmos.Course.find('d2cJSDvIU0c1')
+    course2 = litmos.Course.find('d2cJSDvIU0c2')
+    team.unassign_courses([course1, course2])
+
     # --- Team members ---
 
     # add users to team
