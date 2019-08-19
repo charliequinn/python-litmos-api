@@ -174,10 +174,28 @@ class API(object):
     def remove_sub_resource(cls, resource, resource_id, sub_resource, sub_resource_id):
         cls._perform_request(
             'DELETE',
-            cls._base_url(resource,
-                          resource_id=resource_id,
-                          sub_resource=sub_resource,
-                          sub_resource_id=sub_resource_id)
+            cls._base_url(
+                resource,
+                resource_id=resource_id,
+                sub_resource=sub_resource,
+                sub_resource_id=sub_resource_id)
         )
+
+        return True
+
+    @classmethod
+    def remove_sub_resources(cls, resource, resource_id, sub_resource, attributes):
+        response = cls._perform_request(
+            'DELETE',
+            cls._base_url(
+                resource,
+                resource_id=resource_id,
+                sub_resource=sub_resource
+            ),
+            json=attributes
+        )
+
+        if response.text:
+            return cls._parse_response(response)
 
         return True
