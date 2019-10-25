@@ -7,7 +7,7 @@ from litmos.user import User
 from litmos.course import Course
 from litmos.course_module import CourseModule
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 
 class Litmos(object):
