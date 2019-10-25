@@ -6,8 +6,9 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
+      apikey: 'app-key12345'
     method: GET
-    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?source=app-name12345&format=json
   response:
     body: {string: '{"Id":"JyLa085jwVs1","Name":"Max Chandler","Description":""}'}
     headers:
@@ -27,7 +28,7 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [python-requests/2.12.3]
     method: POST
-    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1/teams?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1/teams?source=app-name12345&format=json
   response:
     body: {string: '{"Id":"L4NTbLzz7rI1","Name":"Bob''s A-Team","Description":"Make
         Pies Great Again"}'}

@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1?source=app-name12345&format=json
   response:
     body: {string: '{"Id":"JyLa085jwVs1","Name":"Max Chandler","Description":""}'}
     headers:
@@ -25,7 +25,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1/teams?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/teams/JyLa085jwVs1/teams?source=app-name12345&format=json
   response:
     body: {string: '[{"Id":"rUxaeaSvSBg1","Name":"Caroline Ross","TeamCodeForBulkImport":"404487-CarolineRoss"},{"Id":"4RotCpfMKEY1","Name":"Kathleen
         Smith","TeamCodeForBulkImport":"404486-KathleenSmith"}]'}

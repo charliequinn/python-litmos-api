@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users?apikey=app-key12345&source=app-name12345&format=json&search=charlie.quinn
+    uri: https://api.litmos.com/v1.svc/users?source=app-name12345&format=json&search=charlie.quinn
   response:
     body: {string: '[{"Id":"857-AOB444E1","UserName":"charlie.quinn","FirstName":"Charlie","LastName":"Quinn","Active":true,"Email":"charlie.quinn@pieshop.net","AccessLevel":"Account_Owner"},{"Id":"y1vW1y4WYJE1","UserName":"charlie.quinn123","FirstName":"Mark","LastName":"Smith","Active":true,"Email":"charlesquinn1984@gmail.com","AccessLevel":"Learner"},{"Id":"fCbdglG3g9g1","UserName":"charlie.quinn@pieshop.net","FirstName":"Mark","LastName":"Quinn","Active":true,"Email":"Charlie.Quinn@pieshop.net","AccessLevel":"Account_Owner"}]'}
     headers:
@@ -36,7 +36,7 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [python-requests/2.12.3]
     method: PUT
-    uri: https://api.litmos.com/v1.svc/users/857-AOB444E1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/users/857-AOB444E1?source=app-name12345&format=json
   response:
     body: {string: ''}
     headers:

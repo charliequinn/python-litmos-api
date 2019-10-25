@@ -8,7 +8,7 @@ interactions:
       Content-Length: ['0']
       User-Agent: [python-requests/2.12.3]
     method: DELETE
-    uri: https://api.litmos.com/v1.svc/users/YmrD13iZlm41?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/users/YmrD13iZlm41?source=app-name12345&format=json
   response:
     body: {string: ''}
     headers:

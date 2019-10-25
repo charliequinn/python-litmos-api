@@ -52,7 +52,8 @@ class TestLitmosAPI:
         eq_(API().find('pies', '345'), {'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwQqfWc2'})
         request.assert_called_once_with(
             'GET',
-            'https://api.litmos.com/v1.svc/pies/345?apikey=api-key-123&source=app-name-123&format=json'
+            'https://api.litmos.com/v1.svc/pies/345?source=app-name-123&format=json',
+            headers = {'apikey': 'api-key-123'},
         )
 
     @patch('litmos.api.requests.request')
@@ -65,7 +66,8 @@ class TestLitmosAPI:
         eq_(API.create('pies', {'Name': 'Cheese & Onion'}), [])
         request.assert_called_once_with(
             'POST',
-            'https://api.litmos.com/v1.svc/pies?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json={'Name': 'Cheese & Onion'}
         )
 
@@ -79,7 +81,8 @@ class TestLitmosAPI:
         eq_(API.update('pies', '12345', {'Name': 'Cheese & Onion'}), [])
         request.assert_called_once_with(
             'PUT',
-            'https://api.litmos.com/v1.svc/pies/12345?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies/12345?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json={'Name': 'Cheese & Onion'}
         )
 
@@ -93,7 +96,8 @@ class TestLitmosAPI:
         eq_(API.update_sub_resource('pies', None, 'chips', 'five', {'Name': 'Cheese & Onion'}), [])
         request.assert_called_once_with(
             'PUT',
-            'https://api.litmos.com/v1.svc/pies/chips/five?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies/chips/five?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json={'Name': 'Cheese & Onion'}
         )
 
@@ -107,7 +111,8 @@ class TestLitmosAPI:
         eq_(API.search('pies', 'farqhuar'), [{'UserName': 'john.smith@pieshop.net', 'Id': 'znJcFwQqfWc2'}])
         request.assert_called_once_with(
             'GET',
-            'https://api.litmos.com/v1.svc/pies?apikey=api-key-123&source=app-name-123&format=json&search=farqhuar'
+            'https://api.litmos.com/v1.svc/pies?source=app-name-123&format=json&search=farqhuar',
+            headers={'apikey': 'api-key-123'},
         )
 
     @patch('litmos.api.requests.request')
@@ -120,7 +125,8 @@ class TestLitmosAPI:
         assert_true(API.delete('pies', 'wsGty'))
         request.assert_called_once_with(
             'DELETE',
-            'https://api.litmos.com/v1.svc/pies/wsGty?apikey=api-key-123&source=app-name-123&format=json'
+            'https://api.litmos.com/v1.svc/pies/wsGty?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
         )
 
     @patch('litmos.api.requests.request')
@@ -133,7 +139,8 @@ class TestLitmosAPI:
         assert_true(API.remove_sub_resource('pies', 'wsGty', 'eaters', 'ws2123'))
         request.assert_called_once_with(
             'DELETE',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters/ws2123?apikey=api-key-123&source=app-name-123&format=json'
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters/ws2123?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
         )
 
     @patch('litmos.api.requests.request')
@@ -152,7 +159,8 @@ class TestLitmosAPI:
         )
         request.assert_called_once_with(
             'GET',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json'
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
         )
 
     @patch('litmos.api.requests.request')
@@ -168,7 +176,8 @@ class TestLitmosAPI:
         )
         request.assert_called_once_with(
             'POST',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json={'Id': '', 'Name': 'Charlie'}
         )
 
@@ -181,13 +190,15 @@ class TestLitmosAPI:
 
         API._perform_request(
             'POST',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json={'Id': '', 'Name': 'Charlie'}
         )
 
         request.assert_called_once_with(
             'POST',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json={'Id': '', 'Name': 'Charlie'}
         )
 
@@ -201,13 +212,15 @@ class TestLitmosAPI:
 
         API._perform_request(
             'POST',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json={'Id': '', 'Name': 'Charlie'}
         )
 
         request.assert_called_once_with(
             'POST',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json={'Id': '', 'Name': 'Charlie'}
         )
 
@@ -238,7 +251,8 @@ class TestLitmosAPI:
 
         request.assert_called_once_with(
             'POST',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?apikey=api-key-123&source=app-name-123&format=json',
+            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json',
+            headers={'apikey': 'api-key-123'},
             json=[
                 OrderedDict([('Id', 'wser4351'),
                              ('UserName', 'paul.smith1'),

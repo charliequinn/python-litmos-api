@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1?source=app-name12345&format=json
   response:
     body: {string: '{"Id":"RuzXNaD42Sw1","Code":"TST001","Name":"Test Why bother","Active":true,"ForSale":false,"OriginalId":590874,"Description":"","EcommerceShortDescription":"","EcommerceLongDescription":"","CourseCodeForBulkImport":"590874-TST001","Price":0.00,"AccessTillDate":null,"AccessTillDays":null}'}
     headers:
@@ -25,7 +25,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1/modules?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1/modules?source=app-name12345&format=json
   response:
     body: {string: '[{"Id":"0jnDHEIbXQo1","Code":"","Name":"Test","Description":""}]'}
     headers:
@@ -43,7 +43,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users/CCzIpPA8OWo1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/users/CCzIpPA8OWo1?source=app-name12345&format=json
   response:
     body: {string: '{"Id":"CCzIpPA8OWo1","UserName":"charlie.quinn@pieshop.net","FirstName":"Charlie","LastName":"Quinn","FullName":"Charlie
         Quinn","Email":"charlie.quinn@pieshop.net","AccessLevel":"Account_Owner","DisableMessages":false,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"2017-06-19T15:48:28Z","LoginKey":"https:\/\/skyscanneruniversity.litmos.com\/login.aspx?loginkey=ff0310fc-b441-46fa-a290-4b631baaf534","IsCustomUsername":false,"Password":"","SkipFirstLogin":true,"TimeZone":"GMT
@@ -66,7 +66,7 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [python-requests/2.12.3]
     method: PUT
-    uri: https://api.litmos.com/v1.svc/results/modules/0jnDHEIbXQo1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/results/modules/0jnDHEIbXQo1?source=app-name12345&format=json
   response:
     body: {string: ''}
     headers:

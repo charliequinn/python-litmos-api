@@ -215,7 +215,7 @@ class TestLitmosIntegration:
 
     @vcr.use_cassette('fixtures/remove-user.yml')
     def test_remove_user(self):
-        team = self.lms.Team.find('JyLa085jwVs1')
+        team = self.lms.Team.find('JyLa085jwVs0')
 
         team_member1 = self.lms.User.create({
             'UserName': 'jobaba7@pieshop.net',

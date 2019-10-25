@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/courses/HvO-gG4n_BI1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/courses/HvO-gG4n_BI1?source=app-name12345&format=json
   response:
     body: {string: '{"Id":"HvO-gG4n_BI1","Code":"WBT001","Name":"Why bother testing?","Active":true,"ForSale":false,"OriginalId":579253,"Description":"Testing
         course","EcommerceShortDescription":"","EcommerceLongDescription":"","CourseCodeForBulkImport":"579253-WBT001","Price":0.00,"AccessTillDate":null,"AccessTillDays":null}'}
@@ -26,7 +26,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/courses/HvO-gG4n_BI1/modules?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/courses/HvO-gG4n_BI1/modules?source=app-name12345&format=json
   response:
     body: {string: '[{"Id":"-Lr_Nmvk8fo1","Code":"","Name":"TEST","Description":""},{"Id":"hK4oCBAod5M1","Code":"","Name":"TEST1","Description":""},{"Id":"EGXsBUoDOYk1","Code":"","Name":"TEST2","Description":""}]'}
     headers:
@@ -44,7 +44,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/users/CCzIpPA8OWo1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/users/CCzIpPA8OWo1?source=app-name12345&format=json
   response:
     body: {string: '{"Id":"CCzIpPA8OWo1","UserName":"charlie.quinn@skyscanner.net","FirstName":"Charlie","LastName":"Quinn","FullName":"Charlie
         Quinn","Email":"charlie.quinn@skyscanner.net","AccessLevel":"Account_Owner","DisableMessages":false,"Active":true,"Skype":"","PhoneWork":"","PhoneMobile":"","LastLogin":"2017-06-06T13:21:16Z","LoginKey":"https:\/\/app-name12345\/login.aspx?loginkey=1b8f4280-d640-4223-832b-830b4c1b0d75","IsCustomUsername":false,"Password":"","SkipFirstLogin":true,"TimeZone":"GMT
@@ -67,7 +67,7 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [python-requests/2.12.3]
     method: PUT
-    uri: https://api.litmos.com/v1.svc/results/modules/EGXsBUoDOYk1?apikey=app-key12345&source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/results/modules/EGXsBUoDOYk1?source=app-name12345&format=json
   response:
     body: {string: '<html version="-//W3C//DTD XHTML 2.0//EN" xml:lang="en" xsi:schemaLocation="http://www.w3.org/1999/xhtml
         http://www.w3.org/MarkUp/SCHEMA/xhtml2.xsd" xmlns="http://www.w3.org/1999/xhtml"

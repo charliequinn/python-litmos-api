@@ -18,15 +18,15 @@ class API(object):
             ("/" + kwargs['resource_id'] if kwargs.get('resource_id', None) else "") + \
             ("/" + kwargs['sub_resource'] if kwargs.get('sub_resource', None) else "") + \
             ("/" + kwargs['sub_resource_id'] if kwargs.get('sub_resource_id', None) else "") + \
-            '?apikey=' + cls.api_key + \
-            '&source=' + cls.app_name + \
+            '?source=' + cls.app_name + \
             '&format=json' + \
             ("&search=" + str(kwargs['search_param']) if kwargs.get('search_param', None) else "") + \
             ("&limit=" + str(kwargs['limit']) if kwargs.get('limit', None) else "") + \
             ("&start=" + str(kwargs['start']) if kwargs.get('start', None) else "")
 
-    @staticmethod
-    def _perform_request(method, url, **kwargs):
+    @classmethod
+    def _perform_request(cls, method, url, **kwargs):
+        kwargs['headers'] = {'apikey': cls.api_key}
         response = requests.request(method, url, **kwargs)
 
         if response.status_code == 503:  # request rate limit exceeded
