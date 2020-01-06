@@ -39,7 +39,7 @@ Litmos API
     :target: https://pypi.python.org/pypi/litmos-api
 
 
-Litmos REST API client for python 3.5>
+Litmos REST API client for python 3.5 and above
 
 * Free software: BSD license
 
