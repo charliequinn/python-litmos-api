@@ -56,6 +56,8 @@ Getting started
 .. code-block:: python
 
     from litmos import Litmos
+
+
     API_KEY = 'AXXXXXXXXXX'
     LITMOS_APP_NAME = 'jins.litmos.com'
     LITMOS_SERVER_URL = 'https://api.litmos.com/v1.svc'  # https://support.litmos.com/hc/en-us/articles/227734667-Overview-Developer-API
