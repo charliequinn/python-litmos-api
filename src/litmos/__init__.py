@@ -13,9 +13,10 @@ __version__ = "0.6.0"
 class Litmos(object):
     ACCEPTABLE_TYPES = ['User', 'Team', 'Course', 'CourseModule']
 
-    def __init__(self, api_key, app_name):
+    def __init__(self, api_key, app_name, root_url='https://api.litmos.com/v1.svc'):
         API.api_key = api_key
         API.app_name = app_name
+        API.ROOT_URL = root_url
 
         self.litmos_api = API
 
