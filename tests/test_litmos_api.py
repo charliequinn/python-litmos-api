@@ -14,7 +14,7 @@ class TestLitmosAPI:
         API.app_name = 'app-name-123'
 
     def test_root_url(self):
-        eq_(API.ROOT_URL, 'https://api.litmos.com/v1.svc/')
+        eq_(API.ROOT_URL, 'https://api.litmos.com/v1.svc')
 
     @patch('litmos.api.requests.request')
     def test_all(self, request):

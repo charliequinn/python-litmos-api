@@ -6,14 +6,14 @@ import requests
 
 
 class API(object):
-    ROOT_URL = 'https://api.litmos.com/v1.svc/'
+    ROOT_URL = 'https://api.litmos.com/v1.svc'
     PAGINATION_OFFSET = 200
     api_key = None
     app_name = None
 
     @classmethod
     def _base_url(cls, resource, **kwargs):
-        return cls.ROOT_URL + \
+        return cls.ROOT_URL + "/" + \
             resource + \
             ("/" + kwargs['resource_id'] if kwargs.get('resource_id', None) else "") + \
             ("/" + kwargs['sub_resource'] if kwargs.get('sub_resource', None) else "") + \

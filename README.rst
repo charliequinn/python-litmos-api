@@ -56,7 +56,11 @@ Getting started
 .. code-block:: python
 
     from litmos import Litmos
-    litmos = Litmos({apikey}, {source})
+    API_KEY = 'AXXXXXXXXXX'
+    LITMOS_APP_NAME = 'jins.litmos.com'
+    LITMOS_SERVER_URL = 'https://api.litmos.com/v1.svc'  # https://support.litmos.com/hc/en-us/articles/227734667-Overview-Developer-API
+    litmos = Litmos(API_KEY, LITMOS_APP_NAME, LITMOS_SERVER_URL)
+
 
     # --- User ---
     # retrieve users
