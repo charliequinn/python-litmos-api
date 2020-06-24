@@ -48,6 +48,15 @@ class User(LitmosType):
         self.Active = False
         return self.save()
 
+    def teams(self):
+        return Team._parse_response(
+            API.get_sub_resource(
+                self.__class__.name(),
+                self.Id,
+                'teams'
+            )
+        )
+
     def remove_teams(self):
         return API.remove_sub_resource(
             self.__class__.name(),
