@@ -124,16 +124,27 @@ class API(object):
 
     @classmethod
     def get_sub_resource(cls, resource, resource_id, sub_resource):
+        return cls._get_sub_resource(resource, resource_id, sub_resource, [], 0)
+
+    @classmethod
+    def _get_sub_resource(cls, resource, resource_id, sub_resource, results, start_pos):
         response = cls._perform_request(
             'GET',
             cls._base_url(
                 resource,
                 resource_id=resource_id,
-                sub_resource=sub_resource
+                sub_resource=sub_resource,
+                limit=cls.PAGINATION_OFFSET, start=start_pos
             )
         )
 
-        return cls._parse_response(response)
+        response_list = cls._parse_response(response)
+        results += response_list
+
+        if not response_list:
+            return results
+        else:
+            return cls._get_sub_resource(resource, resource_id, sub_resource, results, start_pos + cls.PAGINATION_OFFSET)
 
     @classmethod
     def add_sub_resource(cls, resource, resource_id, sub_resource, attributes):
