@@ -2,6 +2,9 @@
 Changelog
 =========
 
+* Add ability to update a user's manager via the manager ID or passing in a user object
+
+
 0.1.1 (2019-08-19)
 -----------------------------------------
 

@@ -96,6 +96,13 @@ Getting started
             'Email': 'jobaba72@pieshop.net'
         })
 
+    # set a user's manager
+    user.set_manager('jdhaskdhlsa')
+
+    # or pass in a user object
+    manager = litmos.User.find('rnjx2WaQOa11')[0]
+    user.set_manager(manager)
+
     # remove all teams from user
     user.remove_teams()
 
