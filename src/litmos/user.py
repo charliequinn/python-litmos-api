@@ -42,10 +42,18 @@ class User(LitmosType):
         ('CustomField9', ''),
         ('CustomField10', ''),
         ('Culture', ''),
+        ('ManagerId',''),
     ])
 
     def deactivate(self):
         self.Active = False
+        return self.save()
+
+    def set_manager(self, manager):
+        if type(manager)==User:
+            self.ManagerId = manager.Id
+        else:
+            self.ManagerId = manager
         return self.save()
 
     def remove_teams(self):
