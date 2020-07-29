@@ -53,7 +53,8 @@ class TestUser:
                          ('CustomField8', ''),
                          ('CustomField9', ''),
                          ('CustomField10', ''),
-                         ('Culture', '')
+                         ('Culture', ''),
+                         ('ManagerId', ''),
                          ]
                         )
         )
