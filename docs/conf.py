@@ -26,7 +26,7 @@ project = 'litmos-api'
 year = '2005-2016'
 author = 'Charlie Quinn'
 copyright = '{0}, {1}'.format(year, author)
-version = release = '0.6.2'
+version = release = '1.0.0'
 
 pygments_style = 'trac'
 templates_path = ['.']
