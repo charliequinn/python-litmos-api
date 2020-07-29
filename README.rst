@@ -96,13 +96,6 @@ Getting started
             'Email': 'jobaba72@pieshop.net'
         })
 
-    # set a user's manager
-    user.set_manager('jdhaskdhlsa')
-
-    # or pass in a user object
-    manager = litmos.User.find('rnjx2WaQOa11')[0]
-    user.set_manager(manager)
-
     # remove all teams from user
     user.remove_teams()
 
@@ -110,8 +103,24 @@ Getting started
     # with Id
     litmos.User.delete('YmrD112qlm41')
 
-    # instance
+    # instance delete
     user.destroy()
+
+    # set a user's manager
+    user.set_manager('jdhaskdhlsa')
+
+    # or pass in a user object
+    manager = litmos.User.find('rnjx2WaQOa11')[0]
+    user.set_manager(manager)
+
+    # advanced custom fields
+    # https://support.litmos.com/hc/en-us/articles/227735427-User-Custom-Fields
+    user.update_advanced_custom_fields(
+        [
+            {"fieldnamex": "value1"},
+            {"fieldnamey": "value2"}
+        ]
+    )
 
     # --- Team ---
     # get all teams
