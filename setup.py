@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='litmos-api',
-    version='1.0.0',
+    version='1.0.1',
     license='BSD',
     description='Python client for Litmos (LMS) API',
     long_description='%s\n%s' % (
