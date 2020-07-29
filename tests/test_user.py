@@ -94,3 +94,21 @@ class TestUser:
 
         assert_true(api_mock.all.called)
         eq_(api_mock.find.call_count, 2)
+
+    @patch('litmos.user.API')
+    def test_update_advanced_custom_fields(self, api_mock):
+        api_mock.add_sub_resource.return_value = True
+
+        user = User({'Id': 'wsGth', 'Active': True})
+
+        fields = [{"Test1": "x"}]
+        assert_true(
+            user.update_advanced_custom_fields(fields)
+        )
+
+        api_mock.add_sub_resource.assert_called_once_with(
+            'users',
+            user.Id,
+            'usercustomfields',
+            fields
+        )

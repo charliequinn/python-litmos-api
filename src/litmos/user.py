@@ -1,5 +1,3 @@
-import json
-
 from collections import OrderedDict
 
 from litmos.api import API
@@ -67,8 +65,8 @@ class User(LitmosType):
         )
 
     def update_advanced_custom_fields(self, data: list):
-        '''Takes a list of dictionaries in the format {'<FIELDNAME>':'<VALUE>'}.
-        Advanced custom userfields may not be enabled by default'''
+        """Takes a list of dictionaries in the format {'<FIELDNAME>':'<VALUE>'}.
+        Advanced custom userfields may not be enabled by default"""
         return API.add_sub_resource(
             self.__class__.name(),
             self.Id,
