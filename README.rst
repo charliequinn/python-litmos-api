@@ -166,4 +166,6 @@ Development
 
 To run the all tests run::
 
+    pip install -r requirements.txt
+    cd tests
     nosetests
