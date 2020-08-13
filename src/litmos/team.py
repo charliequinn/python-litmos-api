@@ -182,6 +182,3 @@ class Team(LitmosType):
             'courses',
             course_list
         )
-
-
-

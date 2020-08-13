@@ -54,6 +54,38 @@ class TestTeam:
         api_mock.get_sub_resource.assert_called_once_with('teams', 'fgUr1', 'leaders')
 
     @patch('litmos.team.API')
+    def test_admins(self, api_mock):
+        api_mock.get_sub_resource.return_value = [
+            {'Id': 'fgUr3', 'Name': 'admin2'},
+        ]
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        users = team.admins()
+
+        eq_(len(users), 1)
+        eq_('fgUr3', users[0].Id)
+        assert_true(isinstance(users[0], User))
+
+        api_mock.get_sub_resource.assert_called_once_with('teams', 'fgUr1', 'admins')
+
+    @patch('litmos.team.API')
+    def test_courses(self, api_mock):
+        api_mock.get_sub_resource.return_value = [
+            {'Id': 'fgUr3a', 'Name': 'course1'},
+        ]
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        courses = team.courses()
+
+        eq_(len(courses), 1)
+        eq_('fgUr3a', courses[0].Id)
+        assert_true(isinstance(courses[0], Course))
+
+        api_mock.get_sub_resource.assert_called_once_with('teams', 'fgUr1', 'courses')
+
+    @patch('litmos.team.API')
     def test_add_sub_team(self, api_mock):
         api_mock.add_sub_resource.return_value = {'Id':'wsd456Yh', 'Name': 'SubTeam1', 'Description': 'SS'}
 
@@ -117,6 +149,40 @@ class TestTeam:
             'teams',
             team.Id,
             'leaders',
+            user1.Id
+        )
+
+    @patch('litmos.team.API')
+    def test_promote_team_admin(self, api_mock):
+        api_mock.update_sub_resource.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        user1 = User({'FirstName': 'Paul1', 'LastName': 'Smith1', 'UserName': 'paul.smith1', 'Id': 'wser4351'})
+
+        assert_true(team.promote_team_admin(user1))
+
+        api_mock.update_sub_resource.assert_called_once_with(
+            'teams',
+            team.Id,
+            'admins',
+            user1.Id
+        )
+
+    @patch('litmos.team.API')
+    def test_demote_team_admin(self, api_mock):
+        api_mock.update_sub_resource.return_value = True
+
+        team = Team({'Id': 'fgUr1', 'Name': 'Team1'})
+
+        user1 = User({'FirstName': 'Paul1', 'LastName': 'Smith1', 'UserName': 'paul.smith1', 'Id': 'wser4351'})
+
+        assert_true(team.demote_team_admin(user1))
+
+        api_mock.remove_sub_resource.assert_called_once_with(
+            'teams',
+            team.Id,
+            'admins',
             user1.Id
         )
 

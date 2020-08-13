@@ -50,6 +50,7 @@ class User(LitmosType):
         return self.save()
 
     def teams(self):
+        from litmos.team import Team
         return Team._parse_response(
             API.get_sub_resource(
                 self.__class__.name(),
