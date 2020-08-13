@@ -2,5 +2,6 @@
 Authors
 =======
 
-* Charlie Quinn - https://blog.ionelmc.ro
+* Charlie Quinn
 * Ignacio Bolonio
+* Jeremy Knickerbocker

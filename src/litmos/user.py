@@ -42,6 +42,7 @@ class User(LitmosType):
         ('CustomField9', ''),
         ('CustomField10', ''),
         ('Culture', ''),
+        ('ManagerId',''),
     ])
 
     def deactivate(self):
@@ -57,12 +58,29 @@ class User(LitmosType):
             )
         )
 
+    def set_manager(self, manager):
+        if type(manager)==User:
+            self.ManagerId = manager.Id
+        else:
+            self.ManagerId = manager
+        return self.save()
+
     def remove_teams(self):
         return API.remove_sub_resource(
             self.__class__.name(),
             self.Id,
             'teams',
             None
+        )
+
+    def update_advanced_custom_fields(self, data: list):
+        """Takes a list of dictionaries in the format {'<FIELDNAME>':'<VALUE>'}.
+        Advanced custom userfields may not be enabled by default"""
+        return API.add_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            'usercustomfields',
+            data
         )
 
     @classmethod
