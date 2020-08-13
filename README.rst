@@ -39,7 +39,7 @@ Litmos API
     :target: https://pypi.python.org/pypi/litmos-api
 
 
-Litmos REST API client for python 3.5 and above
+Litmos REST API client for python 3.6 and above
 
 * Free software: BSD license
 
@@ -96,6 +96,9 @@ Getting started
             'Email': 'jobaba72@pieshop.net'
         })
 
+    # get teams for a user
+    user.teams()
+
     # remove all teams from user
     user.remove_teams()
 
@@ -135,6 +138,9 @@ Getting started
     # get team leaders
     leaders = team.leaders()
 
+    # get team admins
+    admins = team.admins()
+
     # create team (at root level)
     team = litmos.Team.create({'Name': 'A-Team','Description': 'I pity the fool!'})
 
@@ -171,6 +177,13 @@ Getting started
 
     # demote user
     team.demote_team_leader(user1)
+
+    # --- Team admins ---
+    # promote user
+    team.promote_team_admin(user1)
+
+    # demote user
+    team.demote_team_admin(user1)
 
 Documentation
 -------------

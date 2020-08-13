@@ -42,7 +42,7 @@ class User(LitmosType):
         ('CustomField9', ''),
         ('CustomField10', ''),
         ('Culture', ''),
-        ('ManagerId',''),
+        ('ManagerId', ''),
     ])
 
     def deactivate(self):
