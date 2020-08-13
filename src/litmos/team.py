@@ -53,6 +53,24 @@ class Team(LitmosType):
             )
         )
 
+    def admins(self):
+        return User._parse_response(
+            API.get_sub_resource(
+                self.__class__.name(),
+                self.Id,
+                'admins'
+            )
+        )
+
+    def courses(self):
+        return Course._parse_response(
+            API.get_sub_resource(
+                self.__class__.name(),
+                self.Id,
+                'courses'
+            )
+        )
+
     def add_sub_team(self, sub_team):
         schema = copy(self.SCHEMA)
         for param in schema:
@@ -110,6 +128,22 @@ class Team(LitmosType):
             self.__class__.name(),
             self.Id,
             'leaders',
+            user.Id
+        )
+
+    def promote_team_admin(self, user):
+        return API.update_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            'admins',
+            user.Id
+        )
+
+    def demote_team_admin(self, user):
+        return API.remove_sub_resource(
+            self.__class__.name(),
+            self.Id,
+            'admins',
             user.Id
         )
 

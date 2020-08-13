@@ -49,6 +49,15 @@ class User(LitmosType):
         self.Active = False
         return self.save()
 
+    def teams(self):
+        return Team._parse_response(
+            API.get_sub_resource(
+                self.__class__.name(),
+                self.Id,
+                'teams'
+            )
+        )
+
     def set_manager(self, manager):
         if type(manager)==User:
             self.ManagerId = manager.Id
