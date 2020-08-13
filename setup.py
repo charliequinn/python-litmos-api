@@ -62,7 +62,7 @@ setup(
         'litmos', 'API'
     ],
     install_requires=[
-        'requests==2.21.0', 'inflect==0.2.5', 'treelib==1.3.5'
+        'requests==2.24.0', 'inflect==4.1.0', 'treelib==1.6.1'
     ],
     extras_require={
         # eg:
