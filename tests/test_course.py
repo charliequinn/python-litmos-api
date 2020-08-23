@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import patch, ANY
 
 from nose.tools import eq_
 
@@ -33,5 +33,5 @@ class TestCourse:
             None,
             'modules',
             'fg2',
-            {'CourseId': course.Id, 'UpdatedAt': '/Date(1478785811390)/'}
+            ANY
         )

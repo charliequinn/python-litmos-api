@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from requests import HTTPError
-from unittest.mock import patch, Mock
+from unittest.mock import patch, Mock, call
 
 from nose.tools import eq_, assert_true, raises
 
@@ -145,23 +145,77 @@ class TestLitmosAPI:
 
     @patch('litmos.api.requests.request')
     def test_get_sub_resource(self, request):
-        request.return_value = Mock(
-            status_code=200,
-            text='[{\"Id\": \"fgUr3\", \"Name\": \"Charlie\"},{\"Id\": \"fgUr2\", \"Name\": \"John\"}]'
-        )
+        request.side_effect = [
+            Mock(
+                status_code=200,
+                text='[{\"Id\": \"fgUr3\", \"Name\": \"Charlie\"},{\"Id\": \"fgUr2\", \"Name\": \"John\"}]'
+            ),
+            Mock(
+                status_code=200,
+                text='[]'
+            ),
+        ]
 
         eq_(
             API.get_sub_resource('pies', 'wsGty', 'eaters'),
             [
                 {'Id': 'fgUr3', 'Name': 'Charlie'},
-                {'Id': 'fgUr2', 'Name': 'John'}
+                {'Id': 'fgUr2', 'Name': 'John'},
             ]
         )
-        request.assert_called_once_with(
-            'GET',
-            'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json',
-            headers={'apikey': 'api-key-123'},
+        calls = [
+            call(
+                'GET',
+                'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json&limit=200',
+                headers={'apikey': 'api-key-123'}),
+            call(
+                 'GET',
+                 'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json&limit=200&start=200',
+                 headers={'apikey': 'api-key-123'}),
+        ]
+        request.assert_has_calls(calls)
+
+    @patch('litmos.api.requests.request')
+    def test_get_sub_resource_paged(self, request):
+        request.side_effect = [
+            Mock(
+                status_code=200,
+                text='[{\"Id\": \"fgUr3\", \"Name\": \"Charlie\"},{\"Id\": \"fgUr2\", \"Name\": \"John\"}]'
+            ),
+            Mock(
+                status_code=200,
+                text='[{\"Id\": \"fgUr4\", \"Name\": \"Paul\"},{\"Id\": \"fgUr5\", \"Name\": \"Ringo\"}]'
+            ),
+            Mock(
+                status_code=200,
+                text='[]'
+            ),
+        ]
+
+        eq_(
+            API.get_sub_resource('pies', 'wsGty', 'eaters'),
+            [
+                {'Id': 'fgUr3', 'Name': 'Charlie'},
+                {'Id': 'fgUr2', 'Name': 'John'},
+                {'Id': 'fgUr4', 'Name': 'Paul'},
+                {'Id': 'fgUr5', 'Name': 'Ringo'},
+            ]
         )
+        calls = [
+            call(
+                'GET',
+                'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json&limit=200',
+                headers={'apikey': 'api-key-123'}),
+            call(
+                 'GET',
+                 'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json&limit=200&start=200',
+                 headers={'apikey': 'api-key-123'}),
+            call(
+                 'GET',
+                 'https://api.litmos.com/v1.svc/pies/wsGty/eaters?source=app-name-123&format=json&limit=200&start=400',
+                 headers={'apikey': 'api-key-123'}),
+        ]
+        request.assert_has_calls(calls)
 
     @patch('litmos.api.requests.request')
     def test_add_sub_resource(self, request):
