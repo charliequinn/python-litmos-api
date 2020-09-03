@@ -25,11 +25,29 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.3]
     method: GET
-    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1/modules?source=app-name12345&format=json
+    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1/modules?source=app-name12345&format=json&limit=200
   response:
     body: {string: '[{"Id":"0jnDHEIbXQo1","Code":"","Name":"Test","Description":""}]'}
     headers:
       Content-Length: ['64']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Mon, 19 Jun 2017 16:01:46 GMT']
+      Server: [Microsoft-IIS/7.5]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: https://api.litmos.com/v1.svc/courses/RuzXNaD42Sw1/modules?source=app-name12345&format=json&limit=200&start=200
+  response:
+    body: {string: '[]'}
+    headers:
+      Content-Length: ['2']
       Content-Type: [application/json; charset=utf-8]
       Date: ['Mon, 19 Jun 2017 16:01:46 GMT']
       Server: [Microsoft-IIS/7.5]
