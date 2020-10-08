@@ -59,6 +59,16 @@ class User(LitmosType):
             )
         )
 
+    def courses(self):
+        from litmos.course import Course
+        return Course._parse_response(
+            API.get_sub_resource(
+                self.__class__.name(),
+                self.Id,
+                'courses'
+            )
+        )
+    
     def set_manager(self, manager):
         if type(manager)==User:
             self.ManagerId = manager.Id
