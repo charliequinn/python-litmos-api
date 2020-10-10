@@ -88,6 +88,24 @@ class TestUser:
 
         api_mock.get_sub_resource.assert_called_once_with('users', 'fgUr1', 'teams')
 
+
+    @patch('litmos.user.API')
+    def test_courses(self, api_mock):
+        api_mock.get_sub_resource.return_value = [
+            {'Id': 'fgUr3', 'Name': 'Course1'},
+            {'Id': 'fgUr2', 'Name': 'Course2'}
+        ]
+
+        user = User({'Id': 'fgUr1', 'Name': 'User1'})
+
+        courses = user.courses()
+
+        eq_(len(courses), 2)
+        eq_('fgUr3', courses[0].Id)
+
+        api_mock.get_sub_resource.assert_called_once_with('users', 'fgUr1', 'courses')
+
+
     @patch('litmos.litmos.API')
     def test_all_full_details(self, api_mock):
         api_mock.all.return_value = [
