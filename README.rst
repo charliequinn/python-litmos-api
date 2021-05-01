@@ -10,9 +10,9 @@ Litmos API
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/charliequinn/python-litmos-api
 
-.. image:: https://coveralls.io/repos/charliequinn/python-litmos-api/badge.svg?branch=master&service=github
+.. image:: https://coveralls.io/repos/github/charliequinn/python-litmos-api/badge.svg?branch=master
     :alt: Coverage Status
-    :target: https://coveralls.io/r/charliequinn/python-litmos-api
+    :target: https://coveralls.io/github/charliequinn/python-litmos-api
 
 .. image:: https://landscape.io/github/charliequinn/python-litmos-api/master/landscape.svg?style=flat
     :target: https://landscape.io/github/charliequinn/python-litmos-api/master
