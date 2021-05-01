@@ -14,10 +14,6 @@ Litmos API
     :alt: Coverage Status
     :target: https://coveralls.io/github/charliequinn/python-litmos-api
 
-.. image:: https://landscape.io/github/charliequinn/python-litmos-api/master/landscape.svg?style=flat
-    :target: https://landscape.io/github/charliequinn/python-litmos-api/master
-    :alt: Code Quality Status
-
 .. image:: https://img.shields.io/pypi/v/litmos-api.svg?style=flat
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/litmos-api
